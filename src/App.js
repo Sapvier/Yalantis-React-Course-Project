@@ -8,8 +8,9 @@ import {Context} from "./context";
 function App() {
     const [addedItems, setAddedItems] = useState([])
 
-    const addItem = item => {
-        setAddedItems([...addedItems, item])
+    const addItem = (item, count) => {
+            let result = addedItems.filter(addedItem => addedItem.id != item.id)
+            setAddedItems([...result, {...item, quantity: count}])
     }
 
 

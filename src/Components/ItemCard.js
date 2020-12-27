@@ -1,8 +1,9 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {Context} from "../context";
 
 function ItemCard({item}) {
+    const [count, setCount] = useState(1)
 
     const history = useHistory();
     const clickHandler = () => {
@@ -17,7 +18,11 @@ function ItemCard({item}) {
                 <p>Price: {item.price}</p>
                 <p>Origin: {item.origin}</p>
             </div>
-            <button onClick={() => addItem(item)}>Buy</button>
+            <button onClick={() => {
+                addItem(item, count)
+                setCount(count+1)
+                console.log(count)
+            }}>Buy</button>
         </div>
     );
 }

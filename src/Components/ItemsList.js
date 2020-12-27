@@ -10,8 +10,10 @@ function ItemsList() {
         {
             const response = await fetch(`https://yalantis-react-school-api.yalantis.com/api/v1/products`)
             const json = await response.json()
-            const result = json.items
-            setItems(result.map(item => ({...item, quantity: 1})))
+            // const result = json.items
+            setItems(json.items)
+            // setItems(result.map(item => ({...item, quantity: 1})))
+
         }
         fetchItems()
     }, [])

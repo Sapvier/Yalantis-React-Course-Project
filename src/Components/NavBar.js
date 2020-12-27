@@ -4,7 +4,7 @@ import {Context} from "../context";
 
 function NavBar() {
     const {addedItems} = useContext(Context)
-    const total = addedItems.reduce((acc, obj) => acc + obj.price, 0);
+    const total = addedItems.reduce((acc, obj) => acc + obj.price * obj.quantity, 0);
 
     return (
         <nav>

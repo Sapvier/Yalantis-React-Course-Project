@@ -1,0 +1,9 @@
+.shoppingCart {
+    margin-top: -45px;
+}
+
+.shoppingCartTotal {
+    margin-bottom: 10px;
+    border-bottom: 1px solid black;
+    font-weight: bold;
+}

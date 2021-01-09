@@ -1,31 +1,24 @@
-import React, {useState} from 'react';
-import ItemsList from "./Components/ItemsList";
+import React from 'react';
+import ItemsList from "./components/common/ItemsList";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import Bin from "./Components/Bin";
-import DetailedCard from "./Components/DetailedCard";
-import {Context} from "./context";
+import ShoppingCart from "./components/cart/ShoppingCart";
+import DetailedItemCard from "./components/card/DetailedItemCard";
+import ItemsContextProvider from "./ItemsContext";
 
 function App() {
-    const [addedItems, setAddedItems] = useState([])
-
-    const addItem = (item, count) => {
-            let result = addedItems.filter(addedItem => addedItem.id != item.id)
-            setAddedItems([...result, {...item, quantity: count}])
-    }
-
 
     return (
-        <Context.Provider value={{addItem, addedItems}}>
+        <ItemsContextProvider>
             <BrowserRouter>
                 <div>
                     <Switch>
                         <Route path="/" component={ItemsList} exact />
-                        <Route path="/bin" component={Bin} />
-                        <Route path="/:itemId" component={DetailedCard}/>
+                        <Route path="/cart" component={ShoppingCart} />
+                        <Route path="/:itemId" component={DetailedItemCard}/>
                     </Switch>
                 </div>
             </ BrowserRouter>
-        </Context.Provider>
+        </ ItemsContextProvider>
     );
 }
 

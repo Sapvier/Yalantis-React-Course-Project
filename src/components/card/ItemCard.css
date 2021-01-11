@@ -1,0 +1,47 @@
+.itemCard {
+    background-color: lavenderblush;
+    width: 220px;
+    height: 200px;
+    border: 1px solid indianred;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.itemCardContent {
+    margin-left: 10%;
+}
+.p.itemCardContent {
+    line-height: 1.2;
+}
+
+.detailedItemCard {
+    background-color: lavenderblush;
+    width: 320px;
+    height: 200px;
+    border: 1px solid indianred;
+    margin: 0 auto;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.buyButton {
+    width: 60%;
+    height: 40px;
+    font-size: 1rem;
+    margin: 10px 20% 10px 20%;
+    border: none;
+    border-radius: 5px;
+    background-color: #257732;
+    outline: none;
+    color: lavenderblush;
+}
+.buyButton:hover{
+    background-color: #319f3e;
+     cursor: pointer;
+}
+
+
+

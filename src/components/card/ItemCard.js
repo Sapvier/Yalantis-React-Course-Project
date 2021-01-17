@@ -1,10 +1,13 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
-import {ItemsContext} from "../../ItemsContext";
 import "../card/ItemCard.css";
+import {addItem, removeDuplicate} from "../../store/cart/actions";
+import {useDispatch} from "react-redux";
+
 
 function ItemCard({item}) {
     const [count, setCount] = useState(1)
+    const dispatch = useDispatch()
 
     const history = useHistory();
     const clickHandler = () => {
@@ -13,7 +16,6 @@ function ItemCard({item}) {
          state: {count}
         }))
     };
-    const {addItem} = useContext(ItemsContext)
 
 
     return (
@@ -24,7 +26,8 @@ function ItemCard({item}) {
                 <p>Origin: {item.origin}</p>
             </div>
             <button className="buyButton" onClick={() => {
-                addItem(item, count)
+                dispatch(removeDuplicate(item))
+                dispatch(addItem(item, count))
                 setCount(count+1)
             }}>Buy</button>
         </div>

@@ -1,0 +1,30 @@
+aside {
+    position: fixed;
+    top: 85px;
+}
+.origin {
+    padding-left: 10px;
+    padding-bottom: 5px;
+}
+.originName {
+    display: inline-block;
+}
+.filterButton {
+    width: 90%;
+    height: 25px;
+    font-size: 1rem;
+    margin: 10px 20% 10px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #257732;
+    outline: none;
+    color: lavenderblush;
+}
+.filterButton:hover{
+    background-color: #319f3e;
+    cursor: pointer;
+}
+.sideBarPrice {
+    margin: 5px;
+    width: 35px
+}

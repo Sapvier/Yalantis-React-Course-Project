@@ -1,14 +1,17 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useLocation } from "react-router-dom";
 import NavBar from "../header/NavBar";
 import {fetchItem} from "../../utils/services/api/fetch";
 import "../card/ItemCard.css";
-import {ItemsContext} from "../../ItemsContext";
+import {useDispatch} from "react-redux";
+import {addItem, removeDuplicate} from "../../store/cart/actions";
 
-function DetailedItemCard(count) {
+
+function DetailedItemCard() {
     const[item, setItem] = useState({})
     let location = useLocation();
-    const {addItem} = useContext(ItemsContext)
+    const dispatch = useDispatch()
+
 
     useEffect( () => {
         fetchItem(location).then(r => setItem(r))
@@ -24,7 +27,8 @@ function DetailedItemCard(count) {
                     <p>Origin: {item.origin}</p>
                 </div>
                 <button className="buyButton" onClick={() => {
-                    addItem(item, location.state.count)
+                    dispatch(removeDuplicate(item))
+                    dispatch(addItem(item, location.state.count))
                     location.state.count++
                 }}>Buy</button>
             </div>

@@ -3,12 +3,9 @@ import ItemsList from "./components/common/ItemsList";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import ShoppingCart from "./components/cart/ShoppingCart";
 import DetailedItemCard from "./components/card/DetailedItemCard";
-import ItemsContextProvider from "./ItemsContext";
 
 function App() {
-
     return (
-        <ItemsContextProvider>
             <BrowserRouter>
                 <div>
                     <Switch>
@@ -18,7 +15,6 @@ function App() {
                     </Switch>
                 </div>
             </ BrowserRouter>
-        </ ItemsContextProvider>
     );
 }
 

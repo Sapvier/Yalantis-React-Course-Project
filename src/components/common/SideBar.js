@@ -23,7 +23,8 @@ function SideBar () {
 
     }, [])
 
-    const clickHandler = () => {
+    const clickHandler = (e) => {
+        e.preventDefault()
         fetchFilteredItems(originsList.join(), price.minPrice, price.maxPrice).then(r => {
             dispatch(saveProducts(r.items))
         })

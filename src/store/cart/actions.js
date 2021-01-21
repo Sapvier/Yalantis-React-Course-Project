@@ -22,3 +22,9 @@ export const removeQuantity = (item) => {
         payload: {...item, quantity: item.quantity - 1}
     }
 }
+export const setQuantity = (item) => {
+    return {
+        type: "ADD_ITEM",
+        payload: item
+    }
+}

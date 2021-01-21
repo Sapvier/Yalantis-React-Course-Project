@@ -3,6 +3,7 @@
     grid-template-columns: repeat(auto-fill, 220px);
     grid-gap: 0.5rem;
     justify-content: space-between;
+    justify-items: flex-start;
     margin-left: 160px;
 }
 

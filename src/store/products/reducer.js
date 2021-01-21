@@ -1,7 +1,6 @@
-import {SAVE_PRODUCTS} from "./types"
-
 const initialState = {
-    products: []
+    products: [],
+    fetch: "pending"
 }
 
 export const productsReducer = (state = initialState, action) => {
@@ -9,7 +8,16 @@ export const productsReducer = (state = initialState, action) => {
         default:
             return state
         case "SAVE_PRODUCTS": {
-            return {products: action.payload}
+            return {...state, products: action.payload}
+        }
+        case "UPDATE_SUCCESS": {
+            return {...state, fetch: "success"}
+        }
+        case "UPDATE_ERROR": {
+            return {...state, fetch: "error"}
+        }
+        case "UPDATE_LOADING": {
+            return {...state, fetch: "loading"}
         }
     }
 }

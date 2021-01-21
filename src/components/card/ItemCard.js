@@ -1,22 +1,21 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useHistory} from 'react-router-dom';
 import "../card/ItemCard.css";
-import {addItem, removeDuplicate} from "../../store/cart/actions";
-import {useDispatch} from "react-redux";
+import {addItem, addQuantity, removeDuplicate} from "../../store/cart/actions";
+import {useDispatch, useSelector} from "react-redux";
 
 
 function ItemCard({item}) {
-    const [count, setCount] = useState(1)
     const dispatch = useDispatch()
+    const duplicates = useSelector(state => state.cartReducer.items)
+    let itemAdded = duplicates.find(duplicate => duplicate.name === item.name)
 
     const history = useHistory();
     const clickHandler = () => {
         history.push(({
-         pathname: `/${item.id}`,
-         state: {count}
+         pathname: `/${item.id}`
         }))
     };
-
 
     return (
         <div className="itemCard">
@@ -26,9 +25,14 @@ function ItemCard({item}) {
                 <p>Origin: {item.origin}</p>
             </div>
             <button className="buyButton" onClick={() => {
-                dispatch(removeDuplicate(item))
-                dispatch(addItem(item, count))
-                setCount(count+1)
+                    if (itemAdded) {
+                        dispatch(removeDuplicate(itemAdded))
+                        dispatch(addQuantity(itemAdded))
+                    }
+                    else {
+                        dispatch(removeDuplicate(item))
+                        dispatch(addItem(item, 1))
+                    }
             }}>Buy</button>
         </div>
     );

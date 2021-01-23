@@ -1,0 +1,6 @@
+export const ADD_ORIGIN = "ADD_ORIGIN"
+export const REMOVE_ORIGIN = "REMOVE_ORIGIN"
+export const CHECK_ORIGIN = "CHECK_ORIGIN"
+export const UNCHECK_ORIGIN = "UNCHECK_ORIGIN"
+export const SET_MINPRICE = "SET_MINPRICE"
+export const SET_MAXPRICE = "SET_MAXPRICE"

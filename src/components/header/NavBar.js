@@ -1,11 +1,11 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {NavLink} from "react-router-dom";
-import {ItemsContext} from "../../ItemsContext";
 import {totalSum} from "../../utils/services/cartCounter/total";
 import "../header/NavBar.css";
+import {useSelector} from "react-redux";
 
 function NavBar() {
-    const {addedItems} = useContext(ItemsContext)
+    const addedItems = useSelector(state => state.cartReducer.items)
 
     return (
         <nav>

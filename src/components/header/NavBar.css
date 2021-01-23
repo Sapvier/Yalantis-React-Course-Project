@@ -14,7 +14,9 @@
     left: 0;
     right: 0;
     height: 60px;
-    padding: 5px
+    padding: 5px;
+    z-index: 5;
+
 }
 
 .cartButton {

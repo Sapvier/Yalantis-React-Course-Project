@@ -1,24 +1,21 @@
 import React from 'react';
-import ItemsList from "./components/common/ItemsList";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import ShoppingCart from "./components/cart/ShoppingCart";
-import DetailedItemCard from "./components/card/DetailedItemCard";
-import ItemsContextProvider from "./ItemsContext";
+import ItemsPage from "./pages/ItemsPage";
+import DetailedItemPage from "./pages/DetailedItemPage";
+import CartPage from "./pages/CartPage";
+
 
 function App() {
-
     return (
-        <ItemsContextProvider>
             <BrowserRouter>
                 <div>
                     <Switch>
-                        <Route path="/" component={ItemsList} exact />
-                        <Route path="/cart" component={ShoppingCart} />
-                        <Route path="/:itemId" component={DetailedItemCard}/>
+                        <Route path="/" component={ItemsPage} exact />
+                        <Route path="/cart" component={CartPage} />
+                        <Route path="/:itemId" component={DetailedItemPage}/>
                     </Switch>
                 </div>
             </ BrowserRouter>
-        </ ItemsContextProvider>
     );
 }
 

@@ -1,5 +1,3 @@
-import {ADD_ORIGIN} from "./types"
-
 const initialState = {
     price: {
         minPrice: 1,

@@ -1,0 +1,4 @@
+export const SAVE_ORDERS = "SAVE_ORDERS"
+export const UPDATE_SUCCESS = "UPDATE_SUCCESS"
+export const UPDATE_ERROR = "UPDATE_ERROR"
+export const UPDATE_LOADING = "UPDATE_LOADING"

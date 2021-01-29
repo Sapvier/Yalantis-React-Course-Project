@@ -1,5 +1,3 @@
-import {SAVE_PAGES} from "./types"
-
 const initialState = {
     pages: null,
     perPage: 25,

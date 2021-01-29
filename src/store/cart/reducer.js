@@ -1,5 +1,3 @@
-import {ADD_ITEM} from "./types"
-
 const initialState = {
     items: [],
     fetch: "pending"
@@ -13,7 +11,10 @@ export const cartReducer = (state = initialState, action) => {
                 return {items: state.items.concat([action.payload])}
             }
         case "REMOVE_DUPLICATE": {
-            return {items: state.items.filter(item => item.id !== action.payload.id)}
+            return {...state, items: state.items.filter(item => item.id !== action.payload.id)}
+        }
+        case "CLEAR_CART": {
+            return {...state, items: []}
         }
     }
 }

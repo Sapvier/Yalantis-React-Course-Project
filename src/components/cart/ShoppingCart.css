@@ -18,6 +18,11 @@ input[type=number]::-webkit-outer-spin-button {
 .shoppingCartName{
     font-size: 120%;
 }
+.shoppingCartItems {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
 input {
     width: 25px;
     text-align: center;
@@ -25,4 +30,21 @@ input {
 span {
     cursor: pointer;
     margin: 0.5rem;
+}
+.checkOutButton {
+    margin-top: 30px;
+    margin-left: 30px;
+    width: 100px;
+    height: 35px;
+    font-size: 1rem;
+    border-radius: 5px;
+    background-color: slateblue;
+    outline: none;
+    color: antiquewhite;
+    border: 1px solid slateblue;
+    align-self: flex-start;
+}
+.checkOutButton:hover{
+    background-color: darkslateblue;
+    cursor: pointer;
 }

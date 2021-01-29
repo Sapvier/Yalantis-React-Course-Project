@@ -1,6 +1,3 @@
-import {SAVE_PAGES} from "./types"
-
-
 export function savePages(pages) {
     return {
         type: "SAVE_PAGES",

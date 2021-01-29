@@ -1,47 +1,119 @@
 .itemCard {
     background-color: lavenderblush;
     width: 220px;
-    height: 200px;
-    border: 1px solid indianred;
+    height: 195px;
+    border: 1px solid lavenderblush;
     cursor: pointer;
     border-radius: 5px;
     margin-bottom: 5px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
-
 .itemCardContent {
     margin-left: 10%;
 }
 .p.itemCardContent {
     line-height: 1.2;
 }
-
 .detailedItemCard {
     background-color: lavenderblush;
     width: 320px;
     height: 200px;
-    border: 1px solid indianred;
-    margin: 0 auto;
+    border: 1px solid lavenderblush;
+    margin: 100px auto;
     border-radius: 5px;
     font-weight: bold;
     padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
-
+.detailedItemCardContent {
+    margin-left: 35px
+}
+.buttonContainer {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .buyButton {
-    width: 60%;
-    height: 40px;
+    width: 65%;
+    height: 35px;
     font-size: 1rem;
-    margin: 10px 20% 10px 20%;
-    border: none;
+    /*margin: 10px 20% 10px 20%;*/
     border-radius: 5px;
-    background-color: #257732;
+    background-color: slateblue;
     outline: none;
-    color: lavenderblush;
+    color: antiquewhite;
+    border: 1px solid slateblue;
 }
 .buyButton:hover{
-    background-color: #319f3e;
+    background-color: darkslateblue;
      cursor: pointer;
 }
-
+.form {
+    background-color: lavenderblush;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.formButton {
+    margin: 20px 2px 0 2px;
+    border-radius: 5px;
+    border: 1px solid slateblue;
+    background-color: slateblue;
+    color: antiquewhite;
+    height: 30px;
+    width: 85px;
+    cursor: pointer;
+}
+.formButton:hover {
+    background-color: darkslateblue;
+}
+.formInput {
+    text-align: left;
+    background-color: lavenderblush;
+    appearance: none;
+    border: 1px solid indigo;
+    border-radius: 5px;
+}
+.formInput:focus {
+    outline: none;
+}
+.successMessage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgreen;
+    width: 100%;
+    height: 30px;
+    color: darkgreen;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+.errorMessage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    color: darkgreen;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 5px;
+    background-color: darksalmon;
+}
+.pendingMessage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    color: darkgreen;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 5px;
+    background-color: lavenderblush;
+}
 
 

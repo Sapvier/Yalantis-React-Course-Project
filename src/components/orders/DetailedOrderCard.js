@@ -2,10 +2,10 @@ import React from 'react';
 import "../card/ItemCard.css";
 
 
-function DetailedOrderCard({item}) {
+function DetailedOrderCard() {
     return (
         <div className="detailedItemCard">
-            ORDER
+            <p>ORDER</p>
         </div>
     );
 }

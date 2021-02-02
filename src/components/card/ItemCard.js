@@ -1,25 +1,17 @@
 import React from 'react';
-import {useHistory} from 'react-router-dom';
 import "../card/ItemCard.css";
 import {addItem, addQuantity, removeDuplicate} from "../../store/cart/actions";
 import {useDispatch, useSelector} from "react-redux";
 
 
-function ItemCard({item}) {
+function ItemCard({item, handleClick}) {
     const dispatch = useDispatch()
     const duplicates = useSelector(state => state.cartReducer.items)
     let itemAdded = duplicates.find(duplicate => duplicate.name === item.name)
 
-    const history = useHistory();
-    const clickHandler = () => {
-        history.push(({
-         pathname: `/${item.id}`
-        }))
-    };
-
     return (
         <div className="itemCard">
-            <div onClick={clickHandler} className="itemCardContent">
+            <div onClick={() => handleClick(item.id)} className="itemCardContent">
                 <p>{item.name}</p>
                 <p>Price: {item.price}</p>
                 <p>Origin: {item.origin}</p>

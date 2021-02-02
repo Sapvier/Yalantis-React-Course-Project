@@ -5,11 +5,9 @@ import uuid from "react-uuid";
 import {useFormik} from 'formik';
 import {patchItem} from "../../utils/services/api/patch";
 import {patchError, patchProcessing, patchSuccess} from "../../store/form/actions";
-import StatusMessage from "../header/AddItemStatusMessage";
 
 
 function EditItemForm({item, onClose}) {
-    const status = useSelector(state => state.formReducer.patchStatus)
     const origins = useSelector(state => state.filterReducer.origin)
     const dispatch = useDispatch()
     const formik = useFormik({
@@ -21,7 +19,7 @@ function EditItemForm({item, onClose}) {
         onSubmit: (values) => {
             dispatch(patchProcessing())
                 patchItem({product: {...values}}, item.id).then(r => dispatch(patchSuccess())).catch(e => dispatch(patchError()))
-            handlerReset()
+            onClose()
         },
         validate: values => {
             let errors = {}
@@ -61,8 +59,9 @@ function EditItemForm({item, onClose}) {
                        id="name"
                        className="formInput"
                        onChange={formik.handleChange}
-                       value={formik.values.name}/>
-                {formik.errors.name ? <div className="error">{formik.errors.name}</div> : null}
+                       value={formik.values.name}
+                       autoFocus/>
+                {formik.touched.name && formik.errors.name ? <div className="error">{formik.errors.name}</div> : null}
             </div>
             <div className="formControl">
                 <label htmlFor="price"/>Price
@@ -72,7 +71,7 @@ function EditItemForm({item, onClose}) {
                        className="formInput"
                        onChange={formik.handleChange}
                        value={formik.values.price}/>
-                {formik.errors.price ? <div className="error">{formik.errors.price}</div> : null}
+                {formik.touched.price && formik.errors.price ? <div className="error">{formik.errors.price}</div> : null}
             </div>
             <div className="selector"> Origin:
                 <select name="origin"
@@ -86,10 +85,6 @@ function EditItemForm({item, onClose}) {
                 <button className="formButton" type="reset" onClick={handlerReset}>Clear fields</button>
                 <button className="formButton" onClick={onClose}>Close</button>
             </div>
-            {status !== 'pending'
-                ? <StatusMessage status={status}/>
-                : null
-            }
         </form>
     )
 }

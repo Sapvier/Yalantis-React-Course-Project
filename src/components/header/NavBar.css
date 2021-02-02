@@ -84,7 +84,12 @@
     display: block;
     width: 200px;
     padding: 4px 10px;
+    background-color: lightgrey;
 }
+.formInput:focus {
+    background-color: white;
+}
+
 .formControl {
     margin-bottom: 20px;
 }

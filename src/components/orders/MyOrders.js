@@ -1,7 +1,7 @@
 import React, {useCallback} from 'react';
 import Order from "./Order";
 import './Order.css'
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 
 function MyOrders({orders}) {

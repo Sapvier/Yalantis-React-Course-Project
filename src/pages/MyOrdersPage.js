@@ -3,13 +3,13 @@ import "../components/items/ItemsList.css";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchOrders} from "../utils/services/api/fetch";
 import {fetchError, fetchLoading, fetchSuccess, saveOrders} from "../store/orders/actions";
-import NavBar from "../components/header/NavBar";
 import MyOrders from "../components/orders/MyOrders";
+import withHeader from "../HOC/withHeader";
+
 
 function MyOrdersPage() {
     const dispatch = useDispatch()
     const orders = useSelector(state => state.ordersReducer.items)
-
 
     useEffect( () => {
         dispatch(fetchLoading())
@@ -22,10 +22,9 @@ function MyOrdersPage() {
 
     return (
         <div>
-            <NavBar/>
             <MyOrders orders={orders}/>
         </div>
     );
 }
 
-export default MyOrdersPage;
+export default withHeader(MyOrdersPage);

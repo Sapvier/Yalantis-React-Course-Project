@@ -17,7 +17,7 @@ function App() {
                         <Route path="/cart" component={CartPage} />
                         <Route path="/myproducts" component={MyProductsPage}/>
                         <Route path="/orders" component={MyOrdersPage} exact/>
-                        <Route path="/:itemId" component={DetailedItemPage}/>
+                        <Route path="/products/:itemId" component={DetailedItemPage} exact/>
                         <Route path="/orders/:itemId" component={DetailedOrderPage}/>
                     </Switch>
                 </div>

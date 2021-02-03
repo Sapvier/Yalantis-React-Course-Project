@@ -14,12 +14,12 @@ function NavBar() {
     return (
         <nav>
             <div className="navbar">
-                <div className="aligner"/>
+                <NavLink to="/" className="addButton">Home</NavLink>
                 <NavLink to="/myproducts" className="addButton">My Products</NavLink>
                 <NavLink to="/orders" className="addButton">My Orders</NavLink>
                 <p className="addButton" onClick={() => setIsOpen(true)} >Add a Product</p>
                 <AddItemModal open={isOpen} onClose={() => setIsOpen(false)}>
-                    <AddItemForm/>
+                    <AddItemForm onClose={() => setIsOpen(false)}/>
                 </AddItemModal>
                 <div className="cart">
                     <NavLink to="/cart" className="navbarLink"><button className="cartButton">Shopping Cart &#x1f6d2;</button></NavLink>

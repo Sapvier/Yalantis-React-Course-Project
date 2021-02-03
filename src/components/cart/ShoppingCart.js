@@ -2,30 +2,35 @@ import React from 'react';
 import {totalSum} from "../../utils/services/cartCounter/total";
 import "./ShoppingCart.css"
 import CartItem from "./CartItem";
-import {useDispatch, useSelector} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import {postOrder} from "../../utils/services/api/post";
 import {clearCart} from "../../store/cart/actions";
+import {getCartItems} from "../../store/cart/selector";
+import {NavLink} from "react-router-dom";
 
 
-function ShoppingCart({addedItems}) {
-    const items = useSelector(state => state.cartReducer.items)
+function ShoppingCart({addedItems, cartItems}) {
     const dispatch = useDispatch()
     const clickHandler = () => {
-        postOrder(items).then(r => dispatch(clearCart()))
+        postOrder(cartItems).then(r => dispatch(clearCart()))
     }
 
     return (
         <div className="shoppingCart">
+            <NavLink to="/" className="backHome">Home</NavLink>
             <div className="shoppingCartTotal">Cart Subtotal: {totalSum(addedItems)}</div>
             <div className="shoppingCartItems">
                 {addedItems.map(item => <CartItem key={item.id} item={item} className="shoppingCartName" />)}
-                {items.length > 1
-                    ? <button className="checkOutButton" onClick={clickHandler}>Buy</button>
-                    : null}
+                {cartItems.length > 0 && <button className="checkOutButton" onClick={clickHandler}>Buy</button>}
             </div>
         </div>
     );
 }
 
-export default ShoppingCart;
+const mapStateToProps = (state) => {
+    return {
+        cartItems: getCartItems(state)
+    }
+}
+export default connect(mapStateToProps, null)(ShoppingCart)
 

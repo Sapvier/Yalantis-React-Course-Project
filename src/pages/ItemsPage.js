@@ -4,10 +4,11 @@ import {useDispatch, useSelector} from "react-redux";
 import ItemsList from "../components/items/ItemsList";
 import {fetchItems} from "../utils/services/api/fetch";
 import {fetchError, fetchLoading, fetchSuccess, saveProducts} from "../store/products/actions";
-import NavBar from "../components/header/NavBar";
 import SideBar from "../components/sidebar/SideBar";
-import Footer from "../components/footer/Footer";
 import {savePages} from "../store/pagination/actions";
+import withFooter from "../HOC/withFooter";
+import withHeader from "../HOC/withHeader";
+
 
 function ItemsPage() {
     const dispatch = useDispatch()
@@ -29,12 +30,10 @@ function ItemsPage() {
 
     return (
         <div>
-            <NavBar/>
             <SideBar/>
             <ItemsList products={products}/>
-            <Footer />
         </div>
     );
 }
 
-export default ItemsPage;
+export default withHeader(withFooter(ItemsPage));

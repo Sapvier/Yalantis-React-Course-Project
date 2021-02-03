@@ -10,14 +10,14 @@ import PageNumber from "./PageNumber";
 
 
 
-function Footer({pages, perPage}) {
+function Footer({pages, perPage, isEditable}) {
     const dispatch = useDispatch()
     const filter = useSelector(state => state.filterReducer)
 
     const changeHandler = (e) => {
         dispatch(fetchLoading())
         dispatch(setCurrentLimit(parseInt(e.target.value)))
-        fetchItems(1, e.target.value, filter).then(r => {
+        fetchItems(1, e.target.value, filter, isEditable).then(r => {
             dispatch(fetchSuccess())
             dispatch(saveProducts(r.items))
             dispatch(savePages(Math.ceil(r.totalItems / r.perPage)))
@@ -26,11 +26,13 @@ function Footer({pages, perPage}) {
 
     return (
         <div className="perPage">
-            <select className="selector" onChange={changeHandler} defaultValue={perPage}>
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-            </select>
+            <div className="selector">
+                <select onChange={changeHandler} defaultValue={perPage}>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
             <div className="pages">
                 {pages.map(pageItem => <PageNumber className="page" pageItem={pageItem} key={uuid()} />)}
             </div>

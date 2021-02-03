@@ -48,3 +48,9 @@ span {
     background-color: darkslateblue;
     cursor: pointer;
 }
+.backHome {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    float: right;
+}

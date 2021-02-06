@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {totalSum} from "../../utils/services/cartCounter/total";
 import "./ShoppingCart.css"
 import {useDispatch} from "react-redux";
 import {addQuantity, removeDuplicate, removeQuantity, setQuantity} from "../../store/cart/actions";

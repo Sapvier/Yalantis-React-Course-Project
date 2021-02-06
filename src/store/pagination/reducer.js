@@ -1,4 +1,4 @@
-import {SAVE_PAGES} from "./types"
+import {SAVE_PAGES, SET_PAGE, SET_PAGELIMIT} from "./types";
 
 const initialState = {
     pages: null,
@@ -10,13 +10,13 @@ export const pagesReducer = (state = initialState, action) => {
     switch (action.type) {
         default:
             return state
-        case "SAVE_PAGES": {
+        case SAVE_PAGES: {
             return {...state, pages: action.payload}
         }
-        case "SET_PAGE": {
+        case SET_PAGE: {
             return {...state, currentPage: action.payload}
         }
-        case "SET_PAGELIMIT": {
+        case SET_PAGELIMIT: {
             return {...state, perPage: action.payload, currentPage: 1}
         }
     }

@@ -1,6 +1,6 @@
 aside {
     position: fixed;
-    top: 85px;
+    top: 95px;
 }
 .origin {
     padding-left: 10px;
@@ -10,21 +10,22 @@ aside {
     display: inline-block;
 }
 .filterButton {
-    width: 90%;
-    height: 25px;
+    width: 60%;
+    height: 35px;
     font-size: 1rem;
-    margin: 10px 20% 10px 0;
-    border: none;
+    margin: 10px 20% 10px 20%;
     border-radius: 5px;
-    background-color: #257732;
+    background-color: slateblue;
     outline: none;
     color: lavenderblush;
+    border: 1px solid slateblue;
 }
 .filterButton:hover{
-    background-color: #319f3e;
+    background-color: darkslateblue;
     cursor: pointer;
 }
 .sideBarPrice {
     margin: 5px;
     width: 35px
 }
+

@@ -1,4 +1,6 @@
 body {
     margin-top: 80px;
-    background-color: azure;
+    background-color: #FFFFFFFF;
+    font-family: Verdana, sans-serif;
+    font-size: 13px
 }

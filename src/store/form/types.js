@@ -1,0 +1,7 @@
+export const PATCH_SUCCESS = "PATCH_SUCCESS"
+export const PATCH_ERROR = "PATCH_ERROR"
+export const POST_SUCCESS = "POST_SUCCESS"
+export const POST_ERROR = "POST_ERROR"
+export const POST_PROCESSING = "POST_PROCESSING"
+export const PATCH_PROCESSING = "PATCH_PROCESSING"
+

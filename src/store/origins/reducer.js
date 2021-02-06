@@ -1,4 +1,4 @@
-import {ADD_ORIGIN} from "./types"
+import {ADD_ORIGIN, CHECK_ORIGIN, REMOVE_ORIGIN, SET_MAXPRICE, SET_MINPRICE, UNCHECK_ORIGIN} from "./types";
 
 const initialState = {
     price: {
@@ -12,22 +12,22 @@ export const filterReducer = (state = initialState, action) => {
     switch (action.type) {
         default:
             return state
-        case "ADD_ORIGIN": {
+        case ADD_ORIGIN: {
             return {...state, origin: state.origin.concat(action.payload)}
         }
-        case "REMOVE_ORIGIN": {
+        case REMOVE_ORIGIN: {
             return {...state, origin: state.origin.filter(item => item !== action.payload)}
         }
-        case "CHECK_ORIGIN": {
+        case CHECK_ORIGIN: {
             return {...state, origin: state.origin.concat(action.payload)}
         }
-        case "UNCHECK_ORIGIN": {
+        case UNCHECK_ORIGIN: {
             return {...state, origin: state.origin.concat(action.payload)}
         }
-        case "SET_MINPRICE": {
+        case SET_MINPRICE: {
             return {...state, price: {...state.price, minPrice: action.payload}}
         }
-        case "SET_MAXPRICE": {
+        case SET_MAXPRICE: {
             return {...state, price: {...state.price, maxPrice: action.payload}}
         }
     }

@@ -3,6 +3,9 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import ItemsPage from "./pages/ItemsPage";
 import DetailedItemPage from "./pages/DetailedItemPage";
 import CartPage from "./pages/CartPage";
+import MyProductsPage from "./pages/MyProductsPage";
+import MyOrdersPage from "./pages/MyOrdersPage";
+import DetailedOrderPage from "./pages/DetailedOrderPage";
 
 
 function App() {
@@ -12,7 +15,10 @@ function App() {
                     <Switch>
                         <Route path="/" component={ItemsPage} exact />
                         <Route path="/cart" component={CartPage} />
-                        <Route path="/:itemId" component={DetailedItemPage}/>
+                        <Route path="/myproducts" component={MyProductsPage}/>
+                        <Route path="/orders" component={MyOrdersPage} exact/>
+                        <Route path="/products/:itemId" component={DetailedItemPage} exact/>
+                        <Route path="/orders/:itemId" component={DetailedOrderPage}/>
                     </Switch>
                 </div>
             </ BrowserRouter>

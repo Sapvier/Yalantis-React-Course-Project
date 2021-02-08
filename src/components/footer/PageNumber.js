@@ -1,23 +1,15 @@
 import React from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {savePages, setCurrentPage} from "../../store/pagination/actions";
-import {fetchItems} from "../../utils/services/api/fetch";
-import {fetchError, fetchLoading, fetchSuccess, saveProducts} from "../../store/products/actions";
+import {connect, useDispatch, useSelector} from "react-redux";
+import {UPDATE_LOADING} from "../../store/products/types";
+import {filter} from "../../store/products/selector";
 
 
-function PageNumber({pageItem}) {
+function PageNumber({pageItem, filterItems, isEditable}) {
     const dispatch = useDispatch()
     const pagination = useSelector(state => state.pagesReducer)
-    const filter = useSelector(state => state.filterReducer)
 
     const clickHandler = () => {
-        dispatch(fetchLoading())
-        dispatch(setCurrentPage(parseInt(pageItem)))
-        fetchItems(pageItem, pagination.perPage, filter).then(r => {
-            dispatch(fetchSuccess())
-            dispatch(saveProducts(r.items))
-            dispatch(savePages(Math.ceil(r.totalItems / r.perPage)))
-        }).catch(err => dispatch(fetchError()))
+        dispatch({type: UPDATE_LOADING, payload: {...filterItems, currentPage: pageItem, isEditable}})
     }
     if (pagination.currentPage === parseInt(pageItem)) {
         return (
@@ -27,4 +19,10 @@ function PageNumber({pageItem}) {
     else return <div className="page" onClick={clickHandler}>{pageItem}</div>
 }
 
-export default PageNumber;
+
+const mapStateToProps = (state) => {
+    return {
+        filterItems: filter(state)
+    }
+}
+export default connect(mapStateToProps, null)(PageNumber)

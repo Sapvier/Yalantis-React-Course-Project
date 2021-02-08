@@ -1,8 +1,9 @@
-import {SAVE_ORDERS, UPDATE_ERROR, UPDATE_LOADING, UPDATE_SUCCESS} from "./types";
+import {SAVE_ORDERS, UPDATE_ERROR, FETCH_ORDERS, UPDATE_SUCCESS} from "./types";
 
 const initialState = {
     items: [],
-    fetch: "pending"
+    fetch: "pending",
+    post: "pending"
 }
 
 export const ordersReducer = (state = initialState, action) => {
@@ -18,8 +19,8 @@ export const ordersReducer = (state = initialState, action) => {
         case UPDATE_ERROR: {
             return {...state, fetch: "error"}
         }
-        case UPDATE_LOADING: {
-            return {...state, fetch: "loading"}
+        case FETCH_ORDERS: {
+            return {...state, fetch: "fetching"}
         }
     }
 }

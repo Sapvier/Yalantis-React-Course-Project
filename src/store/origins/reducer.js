@@ -1,4 +1,13 @@
-import {ADD_ORIGIN, CHECK_ORIGIN, REMOVE_ORIGIN, SET_MAXPRICE, SET_MINPRICE, UNCHECK_ORIGIN} from "./types";
+import {
+    ADD_ORIGIN,
+    CHECK_ORIGIN,
+    FETCH_FAIL, FETCH_ORIGINS,
+    FETCH_SUCCESS,
+    REMOVE_ORIGIN,
+    SET_MAXPRICE,
+    SET_MINPRICE,
+    UNCHECK_ORIGIN
+} from "./types";
 
 const initialState = {
     price: {
@@ -29,6 +38,15 @@ export const filterReducer = (state = initialState, action) => {
         }
         case SET_MAXPRICE: {
             return {...state, price: {...state.price, maxPrice: action.payload}}
+        }
+        case FETCH_SUCCESS: {
+            return {...state, fetchStatus: 'success'}
+        }
+        case FETCH_FAIL: {
+            return {...state, fetchStatus: 'fail'}
+        }
+        case FETCH_ORIGINS: {
+            return {...state, fetchStatus: 'fetching'}
         }
     }
 }

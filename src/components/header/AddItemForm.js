@@ -3,11 +3,13 @@ import "../header/NavBar.css";
 import {useDispatch, useSelector} from "react-redux";
 import uuid from "react-uuid";
 import {useFormik} from 'formik'
-import {postItem} from "../../utils/services/api/post";
-import {postError, postProcessing, postSuccess} from "../../store/form/actions";
+import {useInjectSaga} from "../../store/injectSaga";
+import productsFormSaga from "../../store/form/saga";
+import {POST_PROCESSING} from "../../store/form/types";
 
 
 function AddItemForm({onClose}) {
+    useInjectSaga('productsFormSaga', productsFormSaga)
     const origins = useSelector(state => state.filterReducer.origin)
     const dispatch = useDispatch()
     const formik = useFormik({
@@ -17,8 +19,7 @@ function AddItemForm({onClose}) {
             origin: 'africa',
         },
         onSubmit: values => {
-            dispatch(postProcessing())
-            postItem({product: {...values}}).then(r => dispatch(postSuccess())).catch(e => dispatch(postError()))
+            dispatch({type: POST_PROCESSING, payload: {product: {...values}}})
             onClose()
         },
         validate: values => {

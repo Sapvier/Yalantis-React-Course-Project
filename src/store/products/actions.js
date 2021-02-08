@@ -21,9 +21,9 @@ export const fetchLoading = () => {
         type: UPDATE_LOADING
     }
 }
-export const updateItem = (item, id) => {
+export const updateItem = (item) => {
     return {
         type: UPDATE_ITEM,
-        payload: {...item.product, id: id}
+        payload: item
     }
 }

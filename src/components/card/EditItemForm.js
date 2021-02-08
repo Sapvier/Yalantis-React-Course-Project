@@ -3,12 +3,14 @@ import "../card/ItemCard.css";
 import {useDispatch, useSelector} from "react-redux";
 import uuid from "react-uuid";
 import {useFormik} from 'formik';
-import {patchItem} from "../../utils/services/api/patch";
-import {patchError, patchProcessing, patchSuccess} from "../../store/form/actions";
-import {updateItem} from "../../store/products/actions";
+import {PATCH_PROCESSING} from "../../store/form/types";
+import {useInjectSaga} from "../../store/injectSaga";
+import productsFormSaga from "../../store/form/saga";
 
 
 function EditItemForm({item, onClose}) {
+    useInjectSaga('productsFormSaga', productsFormSaga)
+
     const origins = useSelector(state => state.filterReducer.origin)
     const dispatch = useDispatch()
     const formik = useFormik({
@@ -18,8 +20,7 @@ function EditItemForm({item, onClose}) {
             origin: item.origin
         },
         onSubmit: (values) => {
-            dispatch(patchProcessing())
-            patchItem({product: {...values}}, item.id).then(r => dispatch(patchSuccess()), dispatch(updateItem({product: {...values}}, item.id))).catch(e => dispatch(patchError()))
+            dispatch({type: PATCH_PROCESSING, payload: {product: {...values}, id: item.id}})
             onClose()
         },
         validate: values => {

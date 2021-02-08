@@ -1,9 +1,18 @@
-import {ADD_ORIGIN, CHECK_ORIGIN, REMOVE_ORIGIN, SET_MAXPRICE, SET_MINPRICE, UNCHECK_ORIGIN} from "./types";
+import {
+    ADD_ORIGIN,
+    CHECK_ORIGIN,
+    FETCH_FAIL, FETCH_ORIGINS,
+    FETCH_SUCCESS,
+    REMOVE_ORIGIN,
+    SET_MAXPRICE,
+    SET_MINPRICE,
+    UNCHECK_ORIGIN
+} from "./types";
 
 export const addOrigins = (origins) => {
     return {
         type: ADD_ORIGIN,
-        payload: origins
+        payload: origins.map(item => ({...item, isChecked: false}))
     }
 }
 export const removeOrigin = (origin) => {
@@ -34,5 +43,20 @@ export const setMaxPrice = (price) => {
     return {
         type: SET_MAXPRICE,
         payload: price
+    }
+}
+export const fetchOriginsSuccess = () => {
+    return {
+        type: FETCH_SUCCESS
+    }
+}
+export const fetchOriginsFail = () => {
+    return {
+        type: FETCH_FAIL
+    }
+}
+export const fetchingOrigins = () => {
+    return {
+        type: FETCH_ORIGINS
     }
 }

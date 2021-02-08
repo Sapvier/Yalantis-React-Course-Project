@@ -3,7 +3,7 @@ import { useLocation} from "react-router-dom";
 import { fetchItem } from "../utils/services/api/fetch";
 import "../components/card/ItemCard.css";
 import DetailedOrderCard from "../components/orders/DetailedOrderCard";
-import withHeader from "../HOC/withHeader";
+import withHeaderAndFooter from "../HOC/withHeaderAndFooter";
 
 
 function DetailedOrderPage() {
@@ -23,4 +23,4 @@ function DetailedOrderPage() {
     );
 }
 
-export default withHeader(DetailedOrderPage);
+export default withHeaderAndFooter(DetailedOrderPage);

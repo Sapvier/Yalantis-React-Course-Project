@@ -1,9 +1,10 @@
-import {SAVE_PAGES, SET_PAGE, SET_PAGELIMIT} from "./types";
+import {FETCH_PAGELIMIT, SAVE_PAGES, SET_PAGE, SET_PAGELIMIT} from "./types";
 
 const initialState = {
     pages: null,
     perPage: 25,
-    currentPage: 1
+    currentPage: 1,
+    status: "pending"
 }
 
 export const pagesReducer = (state = initialState, action) => {
@@ -18,6 +19,9 @@ export const pagesReducer = (state = initialState, action) => {
         }
         case SET_PAGELIMIT: {
             return {...state, perPage: action.payload, currentPage: 1}
+        }
+        case FETCH_PAGELIMIT: {
+            return {...state, status: 'fetching'}
         }
     }
 }

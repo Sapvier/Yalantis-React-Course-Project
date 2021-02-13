@@ -3,9 +3,7 @@ import {
     CHECK_ORIGIN,
     FETCH_FAIL, FETCH_ORIGINS,
     FETCH_SUCCESS,
-    REMOVE_ORIGIN,
-    SET_MAXPRICE,
-    SET_MINPRICE,
+    SET_MINPRICE, SET_PRICE,
     UNCHECK_ORIGIN
 } from "./types";
 
@@ -24,20 +22,22 @@ export const filterReducer = (state = initialState, action) => {
         case ADD_ORIGIN: {
             return {...state, origin: state.origin.concat(action.payload)}
         }
-        case REMOVE_ORIGIN: {
-            return {...state, origin: state.origin.filter(item => item !== action.payload)}
-        }
         case CHECK_ORIGIN: {
-            return {...state, origin: state.origin.concat(action.payload)}
+            return {
+                ...state,
+                origin: state.origin.map(item => item.value === action.payload.value ? {...item, isChecked: !item.isChecked} : item)}
         }
         case UNCHECK_ORIGIN: {
-            return {...state, origin: state.origin.concat(action.payload)}
+            return {
+                ...state,
+                origin: state.origin.map(item => action.payload.includes(item.value) ? {...item, isChecked: true} : item)
+            }
         }
         case SET_MINPRICE: {
             return {...state, price: {...state.price, minPrice: action.payload}}
         }
-        case SET_MAXPRICE: {
-            return {...state, price: {...state.price, maxPrice: action.payload}}
+        case SET_PRICE: {
+            return {...state, price: {...action.payload}}
         }
         case FETCH_SUCCESS: {
             return {...state, fetchStatus: 'success'}

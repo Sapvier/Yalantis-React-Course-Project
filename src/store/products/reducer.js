@@ -1,4 +1,9 @@
-import {SAVE_PRODUCTS, UPDATE_ERROR, UPDATE_ITEM, UPDATE_LOADING, UPDATE_SUCCESS} from "./types";
+import {
+    FETCH_ERROR,
+    FETCH_LOADING, FETCH_SUCCESS,
+    SAVE_PRODUCTS,
+    UPDATE_ITEM,
+} from "./types";
 
 const initialState = {
     products: [],
@@ -12,13 +17,13 @@ export const productsReducer = (state = initialState, action) => {
         case SAVE_PRODUCTS: {
             return {...state, products: action.payload}
         }
-        case UPDATE_SUCCESS: {
+        case FETCH_SUCCESS: {
             return {...state, fetch: "success"}
         }
-        case UPDATE_ERROR: {
+        case FETCH_ERROR: {
             return {...state, fetch: "error"}
         }
-        case UPDATE_LOADING: {
+        case FETCH_LOADING: {
             return {...state, fetch: "loading"}
         }
         case UPDATE_ITEM:

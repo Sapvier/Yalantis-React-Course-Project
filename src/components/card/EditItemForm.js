@@ -20,7 +20,10 @@ function EditItemForm({item, onClose}) {
             origin: item.origin
         },
         onSubmit: (values) => {
-            dispatch({type: PATCH_PROCESSING, payload: {product: {...values}, id: item.id}})
+            dispatch({
+                type: PATCH_PROCESSING,
+                payload: {path: `/products/${item.id}`, method: 'PATCH', filter: '', data: JSON.stringify({product: {...values}})}
+            })
             onClose()
         },
         validate: values => {

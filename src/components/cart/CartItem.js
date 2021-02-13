@@ -14,27 +14,27 @@ function CartItem({item}) {
     }
 
     return (
-            <div className="shoppingCartContent">{item.name}
-                <span onClick={() => {
-                    if (item.quantity < 2) {
-                        dispatch(removeDuplicate(item))
-                    }
-                    else {
-                        dispatch(removeDuplicate(item))
-                        dispatch(removeQuantity(item))
-                        setCount(count - 1)
-                    }
-                }}>&#8722;</span>
-                <input type="number" className="shoppingCartItemQuantity" value={count} onInput={changeHandler}/>
-                <span onClick={() => {
+        <div className="shoppingCartContent">{item.name}
+            <span onClick={() => {
+                if (item.quantity < 2) {
                     dispatch(removeDuplicate(item))
-                    dispatch(addQuantity(item))
-                    setCount(count + 1)
-                }}>&#43;</span>
-                <span onClick={()=> {
+                } else {
                     dispatch(removeDuplicate(item))
-                }}>&#10005;</span>
-            </div>
+                    dispatch(removeQuantity(item))
+                    setCount(count - 1)
+                }
+            }}>&#8722;</span>
+            <input type="number" className="shoppingCartItemQuantity" value={count} onInput={changeHandler}/>
+            <span onClick={() => {
+                dispatch(removeDuplicate(item))
+                dispatch(addQuantity(item))
+                setCount(count + 1)
+            }}>&#43;</span>
+            <span onClick={() => {
+                dispatch(removeDuplicate(item))
+            }}>&#10005;</span>
+        </div>
     )
 }
+
 export default CartItem

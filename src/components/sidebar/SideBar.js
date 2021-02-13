@@ -1,59 +1,138 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import "./SideBar.css";
 import uuid from 'react-uuid'
 import Origin from "./Origin";
 import {connect, useDispatch} from "react-redux";
-import {setMaxPrice, setMinPrice} from "../../store/origins/actions";
-import {getSortedOrigins} from "../../store/origins/selector";
+import {getFilterItems, getOriginsArray, getSortedOrigins} from "../../store/origins/selector";
 import originsSaga from "../../store/origins/saga";
-import {FETCH_ORIGINS} from "../../store/origins/types";
 import {useInjectSaga} from "../../store/injectSaga";
 import {filter} from "../../store/products/selector";
-import {UPDATE_LOADING} from "../../store/products/types";
+import {fetchingOrigins, maxPriceChange, minPriceChange, originChange} from "../../store/origins/actions";
+import {useLocation, useHistory} from "react-router-dom";
+import {FILTER_ORIGIN} from "../../store/origins/types";
 
 
-function SideBar ({origins, isEditable, filterItems}) {
+function SideBar({origins, isEditable, filterItems, originsArray}) {
     useInjectSaga('originsSaga', originsSaga)
     const dispatch = useDispatch()
+    const location = useLocation()
+    const history = useHistory()
+    const queryString = require('query-string');
+    const search = queryString.parse(location.search);
 
 
-    useEffect( () => {
+    useEffect(() => {
         if (origins.length === 0)
-            dispatch({type: FETCH_ORIGINS})
+            dispatch(fetchingOrigins({
+                path: `/products-origins`, method: 'GET', filter: '', origin: search.origin, price: {
+                    minPrice: location.search.length > 0 ? search.minPrice : filterItems.minPrice,
+                    maxPrice: location.search.length > 0 ? search.maxPrice : filterItems.maxPrice
+                }
+            }))
     }, [])
 
 
-    const clickHandler = () => {
-        dispatch({type: UPDATE_LOADING, payload: {...filterItems, isEditable}})
-    }
+
+    const changeHandler = useCallback((origin, originsArray) => {
+        let originsArr = [...originsArray]
+        if (originsArray.includes(origin.value)) {
+            originsArr = originsArr.filter(item => {
+                return item !== origin.value
+            })
+        } else originsArr.push(origin.value)
+
+        const a = dispatch(originChange({
+            origin,
+            path: `/products`,
+            method: 'GET',
+            data: null,
+            filterItems,
+            isEditable
+        }))
+        const b = history.replace({
+            pathname: `${location.pathname}`,
+            search: `minPrice=${filterItems.minPrice}&maxPrice=${filterItems.maxPrice}&origin=${originsArr.join()}`
+        })
+        return [a, b]
+    }, []);
+
+
 
     const minHandleChange = (e) => {
-        dispatch(setMinPrice(e.target.value))
+        dispatch(minPriceChange({
+            path: `/products`,
+            method: 'GET',
+            data: null,
+            price: {
+                maxPrice: filterItems.maxPrice,
+                minPrice: e.target.value,
+            },
+            filter: `?page=${filterItems.currentPage}&perPage=${filterItems.perPage}&origins=${filterItems.origin}&minPrice=${e.target.value}&maxPrice=${filterItems.maxPrice}&editable=${isEditable}`
+        }))
+        history.replace({
+            pathname: `${location.pathname}`,
+            search: `minPrice=${e.target.value}&maxPrice=${filterItems.maxPrice}&origin=${originsArray.join()}`
+        })
     }
+
     const maxHandleChange = (e) => {
-        dispatch(setMaxPrice(e.target.value))
+        dispatch(maxPriceChange({
+            path: `/products`,
+            method: 'GET',
+            data: null,
+            price: {
+                maxPrice: e.target.value,
+                minPrice: filterItems.minPrice
+            },
+            filter: `?page=${filterItems.currentPage}&perPage=${filterItems.perPage}&origins=${filterItems.origin}&minPrice=${filterItems.minPrice}&maxPrice=${e.target.value}&editable=${isEditable}`
+        }))
+        history.replace({
+            pathname: `${location.pathname}`,
+            search: `minPrice=${filterItems.minPrice}&maxPrice=${e.target.value}&origin=${originsArray.join()}`
+        })
     }
 
     return (
         <aside className="side">
-            <p>Origin:</p>
-            {origins.map(origin => <Origin className="origin" origin={origin} key={uuid()}/>)}
-            <div>Price
-                <div>
-                    <input type="number" className="sideBarPrice" name="minPrice" defaultValue={filterItems.minPrice} onInput={minHandleChange}/>&#8212;
-                    <input type="number" className="sideBarPrice" name="maxPrice" onInput={maxHandleChange}/>
+            <form onClick={() => dispatch({type: FILTER_ORIGIN})}>
+                <p>Origin:</p>
+                {origins.map(origin =>
+                    <Origin
+                        className="origin"
+                        origin={origin}
+                        key={uuid()}
+                        isEditable={isEditable}
+                        changeHandler={changeHandler}
+                        originsArray={originsArray}
+                    />)}
+                <div>Price
+                    <div>
+                        <input type="number"
+                               className="sideBarPrice"
+                               name="minPrice"
+                               defaultValue={filterItems.minPrice}
+                               onInput={minHandleChange}/>&#8212;
+                        <input type="number"
+                               className="sideBarPrice"
+                               name="maxPrice"
+                               onInput={maxHandleChange}
+                               defaultValue={filterItems.maxPrice}/>
+                    </div>
                 </div>
-            </div>
-            <button className="filterButton" onClick={clickHandler}>Filter</button>
+            </form>
         </aside>
     );
+
+
 }
 
 
 const mapStateToProps = (state) => {
     return {
         origins: getSortedOrigins(state),
-        filterItems: filter(state)
+        filterItems: filter(state),
+        filter: getFilterItems(state),
+        originsArray: getOriginsArray(state)
     }
 }
 export default connect(mapStateToProps, null)(SideBar)

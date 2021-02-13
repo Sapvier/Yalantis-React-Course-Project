@@ -3,7 +3,6 @@ import "../header/NavBar.css";
 import ReactDom from 'react-dom'
 
 
-
 function EditItemModal({open, children, onClose}) {
     if (!open) return null
     return ReactDom.createPortal(

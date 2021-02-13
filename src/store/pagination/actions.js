@@ -1,9 +1,9 @@
-import {SAVE_PAGES, SET_PAGE, SET_PAGELIMIT} from "./types";
+import {SAVE_PAGES, SET_EDITABLE, SET_PAGE, SET_PAGELIMIT} from "./types";
 
-export function savePages(pages) {
+export function saveItemsCount(totalItems) {
     return {
         type: SAVE_PAGES,
-        payload: pages
+        payload: totalItems
     }
 }
 export function setCurrentPage(page) {
@@ -16,5 +16,11 @@ export function setCurrentLimit(pageLimit) {
     return {
         type: SET_PAGELIMIT,
         payload: pageLimit
+    }
+}
+export function setEditable() {
+    return {
+        type: SET_EDITABLE
+
     }
 }

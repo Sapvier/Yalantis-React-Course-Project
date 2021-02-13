@@ -13,7 +13,7 @@ function ItemsList({products}) {
 
     return (
         <div className="itemsContainer">
-            {products.map(product => <ItemCard item={product} key={product.id} handleClick={handleClick}/>)}
+            {products.length > 0 &&  products.map(product => <ItemCard item={product} key={product.id} handleClick={handleClick}/>)}
         </div>
     );
 }

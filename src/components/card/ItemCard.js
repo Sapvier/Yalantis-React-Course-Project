@@ -18,15 +18,15 @@ function ItemCard({item, handleClick}) {
             </div>
             <div className="buttonContainer">
                 <button className="buyButton" onClick={() => {
-                        if (itemAdded) {
-                            dispatch(removeDuplicate(itemAdded))
-                            dispatch(addQuantity(itemAdded))
-                        }
-                        else {
-                            dispatch(removeDuplicate(item))
-                            dispatch(addItem(item, 1))
-                        }
-                }}>Buy</button>
+                    if (itemAdded) {
+                        dispatch(removeDuplicate(itemAdded))
+                        dispatch(addQuantity(itemAdded))
+                    } else {
+                        dispatch(removeDuplicate(item))
+                        dispatch(addItem(item, 1))
+                    }
+                }}>Buy
+                </button>
             </div>
         </div>
     );

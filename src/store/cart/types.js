@@ -1,4 +1,7 @@
 export const ADD_ITEM = "ADD_ITEM"
 export const REMOVE_DUPLICATE = "REMOVE_DUPLICATE"
 export const CLEAR_CART = "CLEAR_CART"
+export const SAVE_SUCCESS = "ORDERS/SAVE_SUCCESS"
+export const SAVE_ERROR = "ORDERS/SAVE_ERROR"
+export const SAVE_ORDER = "ORDERS/SAVE_ORDER"
 

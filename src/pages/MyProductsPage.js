@@ -3,22 +3,29 @@ import "../components/items/ItemsList.css";
 import {connect, useDispatch, useSelector} from "react-redux";
 import MyItemsList from "../components/items/MyItemsList";
 import SideBar from "../components/sidebar/SideBar";
-import productsSaga, {fetchItems} from "../store/products/saga";
+import productsSaga from "../store/products/saga";
 import {useInjectSaga} from "../store/injectSaga";
-import {UPDATE_LOADING} from "../store/products/types";
-import {filter} from "../store/products/selector";
+import {FETCH_LOADING,} from "../store/products/types";
+import {filter, getProducts} from "../store/products/selector";
 import withHeaderAndFooter from "../HOC/withHeaderAndFooter";
+import {PATCH_SUCCESS} from "../store/form/types";
+import {patchSuccess} from "../store/form/actions";
 
 
-function MyProductsPage({filterItems}) {
+function MyProductsPage({filterItems, products}) {
     useInjectSaga('productsSaga', productsSaga)
     const dispatch = useDispatch()
-    const products = useSelector(state => state.productsReducer.products)
     const isEditable = true
 
-    useEffect( () => {
-        dispatch({type: UPDATE_LOADING, payload: {...filterItems, isEditable}})
-
+    useEffect(() => {
+        dispatch({
+            type: FETCH_LOADING, payload: {
+                path: `/products`,
+                method: 'GET',
+                data: null,
+                filter: `?page=${filterItems.currentPage}&perPage=${filterItems.perPage}&origins=${filterItems.origin}&minPrice=${filterItems.minPrice}&maxPrice=${filterItems.maxPrice}&editable=${isEditable}`
+            }
+        })
     }, [])
 
     return (
@@ -32,7 +39,8 @@ function MyProductsPage({filterItems}) {
 
 const mapStateToProps = (state) => {
     return {
-        filterItems: filter(state)
+        filterItems: filter(state),
+        products: getProducts(state)
     }
 }
 export default connect(mapStateToProps, null)(withHeaderAndFooter(MyProductsPage))

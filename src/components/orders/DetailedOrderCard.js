@@ -2,9 +2,9 @@ import React from 'react';
 import "../card/ItemCard.css";
 
 
-function DetailedOrderCard({item}) {
-    const products = item.pieces || []
-    const date = item.createdAt || ""
+function DetailedOrderCard({order}) {
+    const products = order.pieces || []
+    const date = order.createdAt || ""
 
 
     return (
@@ -12,7 +12,7 @@ function DetailedOrderCard({item}) {
             <div className="detailedItemCardContent">
                 {products.map(piece => <p key={piece.id}>{piece.product.name + ' ' + piece.count} pcs.</p>)}
                 <p>{date.slice(0, 10)}, {date.slice(11, 16)}</p>
-         </div>
+            </div>
         </div>
     );
 }

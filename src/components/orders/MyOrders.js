@@ -13,7 +13,11 @@ function MyOrders({orders}) {
 
     return (
         <div className="ordersContainer">
-            {orders.map(order => <Order order={order} key={order.id} id={orders.indexOf(order) + 1} handleClick={handleClick}/>)}
+            {orders.map(order => <Order
+                order={order} key={order.id}
+                id={orders.indexOf(order) + 1}
+                handleClick={handleClick}
+            />)}
         </div>
     )
 }

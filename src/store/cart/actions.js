@@ -1,4 +1,5 @@
 import {ADD_ITEM, CLEAR_CART, REMOVE_DUPLICATE} from "./types";
+import {SAVE_ERROR, SAVE_ORDER, SAVE_SUCCESS} from "./types";
 
 export const addItem = (item, count) => {
     return {
@@ -33,5 +34,20 @@ export const setQuantity = (item) => {
 export const clearCart = () => {
     return {
         type: CLEAR_CART
+    }
+}
+export const saveOrder = () => {
+    return {
+        type: SAVE_ORDER
+    }
+}
+export const saveOrderSuccess = () => {
+    return {
+        type: SAVE_SUCCESS
+    }
+}
+export const saveOrderError = () => {
+    return {
+        type: SAVE_ERROR
     }
 }

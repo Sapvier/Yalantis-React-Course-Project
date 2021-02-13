@@ -6,6 +6,7 @@ import {useInjectSaga} from "../store/injectSaga";
 import ordersSaga from "../store/orders/saga";
 import {FETCH_ORDERS} from "../store/orders/types";
 import withHeaderAndFooter from "../HOC/withHeaderAndFooter";
+import {FETCH_LOADING} from "../store/products/types";
 
 
 function MyOrdersPage() {
@@ -14,7 +15,7 @@ function MyOrdersPage() {
     const orders = useSelector(state => state.ordersReducer.items)
 
     useEffect( () => {
-        dispatch({type: FETCH_ORDERS})
+        dispatch({type: FETCH_ORDERS, payload: {path: `/orders`, method: 'GET', filter: ``, data: null}})
     }, [])
 
     return (

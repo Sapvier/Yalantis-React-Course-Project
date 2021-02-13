@@ -1,9 +1,10 @@
-import {SAVE_ORDERS, UPDATE_ERROR, FETCH_ORDERS, UPDATE_SUCCESS} from "./types";
+import {SAVE_ORDERS, FETCH_ORDERS, FETCH_ERROR, FETCH_SUCCESS, SAVE_SUCCESS, SAVE_ERROR, SAVE_ORDER} from "./types";
 
 const initialState = {
     items: [],
     fetch: "pending",
-    post: "pending"
+    post: "pending",
+    order: "pending"
 }
 
 export const ordersReducer = (state = initialState, action) => {
@@ -13,10 +14,10 @@ export const ordersReducer = (state = initialState, action) => {
         case SAVE_ORDERS: {
             return {...state, items: action.payload}
         }
-        case UPDATE_SUCCESS: {
+        case FETCH_SUCCESS: {
             return {...state, fetch: "success"}
         }
-        case UPDATE_ERROR: {
+        case FETCH_ERROR: {
             return {...state, fetch: "error"}
         }
         case FETCH_ORDERS: {

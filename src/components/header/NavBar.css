@@ -4,6 +4,7 @@
     cursor: pointer;
     text-decoration: none;
 }
+
 .addButton:hover {
     text-decoration: underline;
 }

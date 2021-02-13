@@ -7,9 +7,11 @@ import AddItemModal from "./AddItemModal";
 import AddItemForm from "./AddItemForm";
 
 
+
 function NavBar() {
     const [isOpen, setIsOpen] = useState(false)
     const addedItems = useSelector(state => state.cartReducer.items)
+
 
     return (
         <nav>
@@ -17,12 +19,14 @@ function NavBar() {
                 <NavLink to="/" className="addButton">Home</NavLink>
                 <NavLink to="/myproducts" className="addButton">My Products</NavLink>
                 <NavLink to="/orders" className="addButton">My Orders</NavLink>
-                <p className="addButton" onClick={() => setIsOpen(true)} >Add a Product</p>
+                <p className="addButton" onClick={() => setIsOpen(true)}>Add a Product</p>
                 <AddItemModal open={isOpen} onClose={() => setIsOpen(false)}>
                     <AddItemForm onClose={() => setIsOpen(false)}/>
                 </AddItemModal>
                 <div className="cart">
-                    <NavLink to="/cart" className="navbarLink"><button className="cartButton">Shopping Cart &#x1f6d2;</button></NavLink>
+                    <NavLink to="/cart" className="navbarLink">
+                        <button className="cartButton">Shopping Cart &#x1f6d2;</button>
+                    </NavLink>
                     <div className="total">Cart Subtotal: {totalSum(addedItems)}</div>
                 </div>
             </div>

@@ -19,7 +19,10 @@ function AddItemForm({onClose}) {
             origin: 'africa',
         },
         onSubmit: values => {
-            dispatch({type: POST_PROCESSING, payload: {product: {...values}}})
+            dispatch({
+                type: POST_PROCESSING,
+                payload: {path: `/products`, method: 'POST', filter: '', data: JSON.stringify({product: {...values}})}
+            })
             onClose()
         },
         validate: values => {

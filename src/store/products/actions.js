@@ -1,4 +1,9 @@
-import {SAVE_PRODUCTS, UPDATE_ERROR, UPDATE_ITEM, UPDATE_LOADING, UPDATE_SUCCESS} from "./types";
+import {
+    FETCH_ERROR, FETCH_LOADING,
+    FETCH_SUCCESS,
+    SAVE_PRODUCTS,
+    UPDATE_ITEM
+} from "./types";
 
 export function saveProducts(products) {
     return {
@@ -8,17 +13,17 @@ export function saveProducts(products) {
 }
 export const fetchSuccess = () => {
     return {
-        type: UPDATE_SUCCESS
+        type: FETCH_SUCCESS
     }
 }
 export const fetchError = () => {
     return {
-        type: UPDATE_ERROR
+        type: FETCH_ERROR
     }
 }
 export const fetchLoading = () => {
     return {
-        type: UPDATE_LOADING
+        type: FETCH_LOADING
     }
 }
 export const updateItem = (item) => {

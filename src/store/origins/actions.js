@@ -1,12 +1,13 @@
 import {
     ADD_ORIGIN,
     CHECK_ORIGIN,
-    FETCH_FAIL, FETCH_ORIGINS,
+    FETCH_FAIL,
+    FETCH_ORIGINS,
     FETCH_SUCCESS,
-    REMOVE_ORIGIN,
-    SET_MAXPRICE,
-    SET_MINPRICE,
-    UNCHECK_ORIGIN
+    MAXPRICE_CHANGE,
+    MINPRICE_CHANGE,
+    ORIGIN_CHANGE,
+    SET_PRICE, UNCHECK_ORIGIN
 } from "./types";
 
 export const addOrigins = (origins) => {
@@ -15,33 +16,15 @@ export const addOrigins = (origins) => {
         payload: origins.map(item => ({...item, isChecked: false}))
     }
 }
-export const removeOrigin = (origin) => {
-    return {
-        type: REMOVE_ORIGIN,
-        payload: origin
-    }
-}
 export const checkOrigin = (origin) => {
     return {
         type: CHECK_ORIGIN,
-        payload: {...origin, isChecked: true}
+        payload: origin
     }
 }
-export const unCheckOrigin = (origin) => {
+export const setPrice = (price) => {
     return {
-        type: UNCHECK_ORIGIN,
-        payload: {...origin, isChecked: false}
-    }
-}
-export const setMinPrice = (price) => {
-    return {
-        type: SET_MINPRICE,
-        payload: price
-    }
-}
-export const setMaxPrice = (price) => {
-    return {
-        type: SET_MAXPRICE,
+        type: SET_PRICE,
         payload: price
     }
 }
@@ -55,8 +38,34 @@ export const fetchOriginsFail = () => {
         type: FETCH_FAIL
     }
 }
-export const fetchingOrigins = () => {
+export const fetchingOrigins = (payload) => {
     return {
-        type: FETCH_ORIGINS
+        type: FETCH_ORIGINS,
+        payload: payload
+    }
+}
+export const originChange = (payload) => {
+    return {
+        type: ORIGIN_CHANGE,
+        payload: payload
+    }
+}
+export const minPriceChange = (payload) => {
+    return {
+        type: MINPRICE_CHANGE,
+        payload: payload
+    }
+}
+export const maxPriceChange = (payload) => {
+    return {
+        type: MAXPRICE_CHANGE,
+        payload: payload
+    }
+}
+
+export const fetchFiltered = (payload) => {
+    return {
+        type: UNCHECK_ORIGIN,
+        payload: payload
     }
 }

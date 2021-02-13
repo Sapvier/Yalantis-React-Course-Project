@@ -1,23 +1,28 @@
-import {FETCH_ERROR, FETCH_ORDERS, FETCH_SUCCESS, SAVE_ERROR, SAVE_ORDER, SAVE_ORDERS, SAVE_SUCCESS} from "./types";
+import {
+    ORDERS_FETCH_ERROR,
+    ORDERS_FETCH_ORDERS,
+    ORDERS_FETCH_SUCCESS,
+    ORDERS_SAVE_ORDERS
+} from "./types";
 
 export function saveOrders(products) {
     return {
-        type: SAVE_ORDERS,
+        type: ORDERS_SAVE_ORDERS,
         payload: products.items
     }
 }
-export const fetchSuccess = () => {
+export const fetchOrdersSuccess = () => {
     return {
-        type: FETCH_SUCCESS
+        type: ORDERS_FETCH_SUCCESS
     }
 }
-export const fetchError = () => {
+export const fetchOrdersError = () => {
     return {
-        type: FETCH_ERROR
+        type: ORDERS_FETCH_ERROR
     }
 }
-export const fetchLoading = () => {
+export const fetchOrdersLoading = () => {
     return {
-        type: FETCH_ORDERS
+        type: ORDERS_FETCH_ORDERS
     }
 }

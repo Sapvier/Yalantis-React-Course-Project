@@ -1,6 +1,6 @@
 import React from 'react';
 import "../card/ItemCard.css";
-import {addItem, addQuantity, removeDuplicate} from "../../store/cart/actions";
+import {addItem, addQuantity, removeFromCart} from "../../store/cart/actions";
 import {useDispatch, useSelector} from "react-redux";
 
 
@@ -19,10 +19,10 @@ function ItemCard({item, handleClick}) {
             <div className="buttonContainer">
                 <button className="buyButton" onClick={() => {
                     if (itemAdded) {
-                        dispatch(removeDuplicate(itemAdded))
+                        dispatch(removeFromCart(itemAdded))
                         dispatch(addQuantity(itemAdded))
                     } else {
-                        dispatch(removeDuplicate(item))
+                        dispatch(removeFromCart(item))
                         dispatch(addItem(item, 1))
                     }
                 }}>Buy

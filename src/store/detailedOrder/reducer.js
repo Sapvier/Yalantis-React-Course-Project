@@ -1,4 +1,9 @@
-import {FETCH_ERROR, FETCH_ORDER, FETCH_SUCCESS, SAVE_ORDER} from "./types";
+import {
+    DETAILED_ORDER_FETCH_ERROR,
+    DETAILED_ORDER_FETCH_ORDER,
+    DETAILED_ORDER_FETCH_SUCCESS,
+    DETAILED_ORDER_SAVE_ORDER
+} from "./types";
 
 
 const initialState = {
@@ -10,16 +15,16 @@ export const detailedOrderReducer = (state = initialState, action) => {
     switch (action.type) {
         default:
             return state
-        case SAVE_ORDER: {
+        case DETAILED_ORDER_SAVE_ORDER: {
             return {...state, order: action.payload}
         }
-        case FETCH_SUCCESS: {
+        case DETAILED_ORDER_FETCH_SUCCESS: {
             return {...state, fetch: "success"}
         }
-        case FETCH_ERROR: {
+        case DETAILED_ORDER_FETCH_ERROR: {
             return {...state, fetch: "error"}
         }
-        case FETCH_ORDER: {
+        case DETAILED_ORDER_FETCH_ORDER: {
             return {...state, fetch: "fetching"}
         }
     }

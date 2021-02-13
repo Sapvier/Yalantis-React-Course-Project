@@ -1,8 +1,9 @@
 import {
-    FETCH_ERROR,
-    FETCH_LOADING, FETCH_SUCCESS,
-    SAVE_PRODUCTS,
-    UPDATE_ITEM,
+    PRODUCTS_FETCH_ERROR,
+    PRODUCTS_FETCH_LOADING,
+    PRODUCTS_FETCH_SUCCESS,
+    PRODUCTS_SAVE_PRODUCTS,
+    PRODUCTS_UPDATE_ITEM
 } from "./types";
 
 const initialState = {
@@ -14,19 +15,19 @@ export const productsReducer = (state = initialState, action) => {
     switch (action.type) {
         default:
             return state
-        case SAVE_PRODUCTS: {
+        case PRODUCTS_SAVE_PRODUCTS: {
             return {...state, products: action.payload}
         }
-        case FETCH_SUCCESS: {
+        case PRODUCTS_FETCH_SUCCESS: {
             return {...state, fetch: "success"}
         }
-        case FETCH_ERROR: {
+        case PRODUCTS_FETCH_ERROR: {
             return {...state, fetch: "error"}
         }
-        case FETCH_LOADING: {
+        case PRODUCTS_FETCH_LOADING: {
             return {...state, fetch: "loading"}
         }
-        case UPDATE_ITEM:
+        case PRODUCTS_UPDATE_ITEM:
             return {
                 ...state,
                 products: state.products.map(item => {

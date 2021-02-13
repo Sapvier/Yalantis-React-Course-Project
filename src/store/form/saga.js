@@ -1,14 +1,9 @@
 import {takeEvery, call, put} from 'redux-saga/effects'
 import {patchError, patchSuccess, postError, postSuccess} from './actions';
 import {updateItem} from "../products/actions";
-import {PATCH_PROCESSING, POST_PROCESSING} from "./types";
+import {FORM_PATCH_PROCESSING, FORM_POST_PROCESSING} from "./types";
 import {fetchItems} from "../products/saga";
 
-
-export default function* productsFormSaga() {
-    yield takeEvery(PATCH_PROCESSING, onPatchProduct)
-    yield takeEvery(POST_PROCESSING, onPostProduct)
-}
 
 export function* onPatchProduct(action) {
     try {
@@ -26,4 +21,9 @@ export function* onPostProduct(action) {
     } catch (e) {
         yield put(postError())
     }
+}
+
+export default function* productsFormSaga() {
+    yield takeEvery(FORM_PATCH_PROCESSING, onPatchProduct)
+    yield takeEvery(FORM_POST_PROCESSING, onPostProduct)
 }

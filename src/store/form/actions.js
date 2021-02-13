@@ -1,33 +1,42 @@
-import {PATCH_ERROR, PATCH_PROCESSING, PATCH_SUCCESS, POST_ERROR, POST_PROCESSING, POST_SUCCESS} from "./types";
+import {
+    FORM_PATCH_ERROR,
+    FORM_PATCH_PROCESSING,
+    FORM_PATCH_SUCCESS,
+    FORM_POST_ERROR,
+    FORM_POST_PROCESSING,
+    FORM_POST_SUCCESS
+} from "./types";
 
 export const patchSuccess = () => {
     return {
-        type: PATCH_SUCCESS
+        type: FORM_PATCH_SUCCESS
     }
 }
 export const postSuccess = () => {
     return {
-        type: POST_SUCCESS
+        type: FORM_POST_SUCCESS
     }
 }
 export const patchError = () => {
     return {
-        type: PATCH_ERROR
+        type: FORM_PATCH_ERROR
     }
 }
 export const postError = () => {
     return {
-        type: POST_ERROR
+        type: FORM_POST_ERROR
     }
 }
-export const postProcessing = () => {
+export const postProcessing = (payload) => {
     return {
-        type: POST_PROCESSING
+        type: FORM_POST_PROCESSING,
+        payload: payload
     }
 }
-export const patchProcessing = () => {
+export const patchProcessing = (payload) => {
     return {
-        type: PATCH_PROCESSING
+        type: FORM_PATCH_PROCESSING,
+        payload: payload
     }
 }
 

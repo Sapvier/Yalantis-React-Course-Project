@@ -3,7 +3,6 @@ import "./SideBar.css";
 
 
 function Origin({origin, changeHandler, originsArray}) {
-
     if (origin.isChecked) {
         return (
             <div>
@@ -18,7 +17,6 @@ function Origin({origin, changeHandler, originsArray}) {
         </div>
     )
 }
-
 
 export default Origin;
 

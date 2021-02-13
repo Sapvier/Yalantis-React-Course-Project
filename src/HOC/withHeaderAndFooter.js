@@ -3,12 +3,11 @@ import NavBar from "../components/header/NavBar";
 import Footer from "../components/footer/Footer";
 
 
-const withHeaderAndFooter = (WrappedComponent)  => props => {
-    const { location } = props
+const withHeaderAndFooter = (WrappedComponent) => props => {
+    const {location} = props
     const withFooter = ['/myproducts', '/'].includes(location.pathname)
     const myProducts = ['/myproducts'].includes(location.pathname)
     const isEditable = true
-
 
     if (myProducts) return (
         <>

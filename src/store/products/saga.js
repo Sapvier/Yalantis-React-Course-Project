@@ -1,13 +1,8 @@
 import { takeEvery, call, put } from 'redux-saga/effects'
 import {fetchError, fetchSuccess, saveProducts} from './actions';
-import {FETCH_LOADING} from "./types";
-import {saveItemsCount, savePages} from "../pagination/actions";
-import {fetchFiltered, filterOrigin, setPrice} from "../origins/actions";
+import {saveItemsCount} from "../pagination/actions";
+import {PRODUCTS_FETCH_LOADING} from "./types";
 
-
-export default function* productsSaga() {
-    yield takeEvery(FETCH_LOADING, onGetProducts)
-}
 
 export function* onGetProducts(action) {
     try {
@@ -30,5 +25,9 @@ export const fetchItems = async (filterItems) => {
         body: filterItems.data
     })
     return response.json()
+}
+
+export default function* productsSaga() {
+    yield takeEvery(PRODUCTS_FETCH_LOADING, onGetProducts)
 }
 

@@ -10,10 +10,9 @@ function ItemsList({products}) {
         return history.push(`/products/${id}`)
     }, []);
 
-
     return (
         <div className="itemsContainer">
-            {products.length > 0 &&  products.map(product => <ItemCard item={product} key={product.id} handleClick={handleClick}/>)}
+            {products.length > 0 && products.map(product => <ItemCard item={{...product, quantity: 1}} key={product.id} handleClick={handleClick}/>)}
         </div>
     );
 }

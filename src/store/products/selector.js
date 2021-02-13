@@ -1,5 +1,3 @@
-import {useSelector} from "react-redux";
-
 export const getFilter = state => state.filterReducer
 export const paginationPage = state => state.pagesReducer.currentPage
 export const paginationPerPage = state => state.pagesReducer.perPage

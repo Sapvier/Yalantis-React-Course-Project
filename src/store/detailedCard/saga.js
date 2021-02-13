@@ -1,11 +1,7 @@
 import {takeEvery, call, put} from 'redux-saga/effects'
-import {FETCH_ITEM} from "./types";
+import {DETAILED_CARD_FETCH_ITEM} from "./types";
 import {fetchError, fetchSuccess, saveItem} from "./actions";
 
-
-export default function* detailedItemSaga() {
-    yield takeEvery(FETCH_ITEM, onGetDetailed)
-}
 
 export function* onGetDetailed(action) {
     try {
@@ -17,7 +13,6 @@ export function* onGetDetailed(action) {
     }
 }
 
-
 export const fetchItem = async (location) => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}${location}`, {
         method: 'GET',
@@ -27,4 +22,8 @@ export const fetchItem = async (location) => {
         },
     })
     return response.json()
+}
+
+export default function* detailedItemSaga() {
+    yield takeEvery(DETAILED_CARD_FETCH_ITEM, onGetDetailed)
 }

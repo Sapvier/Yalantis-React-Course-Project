@@ -1,4 +1,9 @@
-import {FETCH_PAGELIMIT, SAVE_PAGES, SET_EDITABLE, SET_PAGE, SET_PAGELIMIT} from "./types";
+import {
+    PAGINATION_FETCH_PAGELIMIT,
+    PAGINATION_SAVE_PAGES,
+    PAGINATION_SET_PAGE,
+    PAGINATION_SET_PAGELIMIT
+} from "./types";
 
 const initialState = {
     totalItems: 1,
@@ -12,20 +17,17 @@ export const pagesReducer = (state = initialState, action) => {
     switch (action.type) {
         default:
             return state
-        case SAVE_PAGES: {
+        case PAGINATION_SAVE_PAGES: {
             return {...state, totalItems: action.payload}
         }
-        case SET_PAGE: {
+        case PAGINATION_SET_PAGE: {
             return {...state, currentPage: action.payload}
         }
-        case SET_PAGELIMIT: {
+        case PAGINATION_SET_PAGELIMIT: {
             return {...state, perPage: action.payload, currentPage: 1}
         }
-        case FETCH_PAGELIMIT: {
+        case PAGINATION_FETCH_PAGELIMIT: {
             return {...state, status: 'fetching'}
-        }
-        case SET_EDITABLE: {
-            return {...state, isEditable: !state.isEditable}
         }
     }
 }

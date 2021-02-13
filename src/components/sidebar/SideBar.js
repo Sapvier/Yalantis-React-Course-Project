@@ -9,7 +9,6 @@ import {useInjectSaga} from "../../store/injectSaga";
 import {filter} from "../../store/products/selector";
 import {fetchingOrigins, maxPriceChange, minPriceChange, originChange} from "../../store/origins/actions";
 import {useLocation, useHistory} from "react-router-dom";
-import {FILTER_ORIGIN} from "../../store/origins/types";
 
 
 function SideBar({origins, isEditable, filterItems, originsArray}) {
@@ -32,7 +31,6 @@ function SideBar({origins, isEditable, filterItems, originsArray}) {
     }, [])
 
 
-
     const changeHandler = useCallback((origin, originsArray) => {
         let originsArr = [...originsArray]
         if (originsArray.includes(origin.value)) {
@@ -41,7 +39,7 @@ function SideBar({origins, isEditable, filterItems, originsArray}) {
             })
         } else originsArr.push(origin.value)
 
-        const a = dispatch(originChange({
+        const dispatch = dispatch(originChange({
             origin,
             path: `/products`,
             method: 'GET',
@@ -49,13 +47,12 @@ function SideBar({origins, isEditable, filterItems, originsArray}) {
             filterItems,
             isEditable
         }))
-        const b = history.replace({
+        const replace = history.replace({
             pathname: `${location.pathname}`,
             search: `minPrice=${filterItems.minPrice}&maxPrice=${filterItems.maxPrice}&origin=${originsArr.join()}`
         })
-        return [a, b]
+        return [dispatch, replace]
     }, []);
-
 
 
     const minHandleChange = (e) => {
@@ -94,7 +91,7 @@ function SideBar({origins, isEditable, filterItems, originsArray}) {
 
     return (
         <aside className="side">
-            <form onClick={() => dispatch({type: FILTER_ORIGIN})}>
+            <form onClick={() => console.log(true)}>
                 <p>Origin:</p>
                 {origins.map(origin =>
                     <Origin
@@ -122,8 +119,6 @@ function SideBar({origins, isEditable, filterItems, originsArray}) {
             </form>
         </aside>
     );
-
-
 }
 
 

@@ -1,4 +1,9 @@
-import {FETCH_ERROR, FETCH_ITEM, FETCH_SUCCESS, SAVE_ITEM} from "./types";
+import {
+    DETAILED_CARD_FETCH_ERROR,
+    DETAILED_CARD_FETCH_ITEM,
+    DETAILED_CARD_FETCH_SUCCESS,
+    DETAILED_CARD_SAVE_ITEM
+} from "./types";
 
 
 const initialState = {
@@ -10,16 +15,16 @@ export const detailedItemReducer = (state = initialState, action) => {
     switch (action.type) {
         default:
             return state
-        case SAVE_ITEM: {
+        case DETAILED_CARD_SAVE_ITEM: {
             return {...state, item: action.payload}
         }
-        case FETCH_SUCCESS: {
+        case DETAILED_CARD_FETCH_SUCCESS: {
             return {...state, fetch: "success"}
         }
-        case FETCH_ERROR: {
+        case DETAILED_CARD_FETCH_ERROR: {
             return {...state, fetch: "error"}
         }
-        case FETCH_ITEM: {
+        case DETAILED_CARD_FETCH_ITEM: {
             return {...state, fetch: "fetching"}
         }
     }

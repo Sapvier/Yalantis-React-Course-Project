@@ -3,11 +3,10 @@ import "../footer/Footer.css";
 import {connect, useDispatch} from "react-redux";
 import {getFilter, getPages} from "../../store/pagination/selector";
 import {filter} from "../../store/products/selector";
-import {FETCH_PAGELIMIT} from "../../store/pagination/types";
 import {useInjectSaga} from "../../store/injectSaga";
 import pagesSaga from "../../store/pagination/saga";
-import {FETCH_LOADING} from "../../store/products/types";
 import Pagination from "react-js-pagination";
+import {fetchLoading} from "../../store/products/actions";
 
 
 function Footer({filterItems, isEditable, filter}) {
@@ -15,51 +14,46 @@ function Footer({filterItems, isEditable, filter}) {
     const dispatch = useDispatch()
 
     const changeHandler = (e) => {
-        dispatch({
-            type: FETCH_PAGELIMIT, payload: {
+        dispatch(fetchLoading({
                 path: `/products`,
                 method: 'GET',
                 data: null,
                 perPage: parseInt(e.target.value),
                 filter: `?page=${filterItems.currentPage}&perPage=${e.target.value}&origins=${filterItems.origin}&minPrice=${filterItems.minPrice}&maxPrice=${filterItems.maxPrice}&editable=${isEditable}`
             }
-        })
+        ))
     }
 
     const backClickHandler = () => {
-        dispatch({
-            type: FETCH_LOADING, payload: {
+        dispatch(fetchLoading({
                 path: `/products`,
                 currentPage: filterItems.currentPage === 1 ? filterItems.currentPage : filterItems.currentPage - 1,
                 method: 'GET',
                 data: null,
                 filter: `?page=${filterItems.currentPage === 1 ? filterItems.currentPage : filterItems.currentPage - 1}&perPage=${filterItems.perPage}&origins=${filterItems.origin}&minPrice=${filterItems.minPrice}&maxPrice=${filterItems.maxPrice}&editable=${isEditable}`
             }
-        })
+        ))
     }
     const forwardClickHandler = () => {
-        dispatch({
-            type: FETCH_LOADING, payload: {
+        dispatch(fetchLoading({
                 path: `/products`,
-                currentPage: filterItems.currentPage + 1,
+                currentPage: filterItems.currentPage === Math.ceil(filter.totalItems / filterItems.perPage) ? filterItems.currentPage : filterItems.currentPage + 1,
                 method: 'GET',
                 data: null,
-                filter: `?page=${filterItems.currentPage + 1}&perPage=${filterItems.perPage}&origins=${filterItems.origin}&minPrice=${filterItems.minPrice}&maxPrice=${filterItems.maxPrice}&editable=${isEditable}`
+                filter: `?page=${filterItems.currentPage === Math.ceil(filter.totalItems / filterItems.perPage) ? filterItems.currentPage : filterItems.currentPage + 1}&perPage=${filterItems.perPage}&origins=${filterItems.origin}&minPrice=${filterItems.minPrice}&maxPrice=${filterItems.maxPrice}&editable=${isEditable}`
             }
-        })
+        ))
     }
     const handlePageChange = (pageNumber) => {
-        dispatch({
-            type: FETCH_LOADING, payload: {
+        dispatch(fetchLoading({
                 path: `/products`,
                 currentPage: pageNumber,
                 method: 'GET',
                 data: null,
                 filter: `?page=${pageNumber}&perPage=${filterItems.perPage}&origins=${filterItems.origin}&minPrice=${filterItems.minPrice}&maxPrice=${filterItems.maxPrice}&editable=${isEditable}`
             }
-        })
+        ))
     }
-
 
     return (
         <div className="perPage">

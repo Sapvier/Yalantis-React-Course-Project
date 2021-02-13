@@ -1,7 +1,5 @@
 export const getItems = state => state.pagesReducer.pages
-export const getPerPage = state => state.pagesReducer.perPage
 export const getFilter = state => state.pagesReducer
-export const getCurrentPage = state => state.pagesReducer.currentPage
 
 
 export const getPages = state => {

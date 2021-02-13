@@ -1,18 +1,14 @@
 import {takeEvery, call, put, select, debounce} from 'redux-saga/effects'
-import {
-    addOrigins,
-    checkOrigin, fetchFiltered,
-    fetchOriginsFail,
-    fetchOriginsSuccess,
-    setPrice
-} from './actions';
+import {addOrigins, checkOrigin, fetchFiltered, fetchOriginsFail, fetchOriginsSuccess, setPrice} from './actions';
 import {fetchError, fetchLoading, fetchSuccess, saveProducts} from "../products/actions";
 import {fetchItems} from "../products/saga";
 import {saveItemsCount} from "../pagination/actions";
 import {
-    FETCH_FILTER,
-    FETCH_ORIGINS, MAXPRICE_CHANGE, MINPRICE_CHANGE,
-    ORIGIN_CHANGE
+    ORIGINS_FETCH_FILTER,
+    ORIGINS_FETCH_ORIGINS,
+    ORIGINS_MAXPRICE_CHANGE,
+    ORIGINS_MINPRICE_CHANGE,
+    ORIGINS_ORIGIN_CHANGE
 } from "./types";
 import {getOriginsArray} from "./selector";
 
@@ -76,10 +72,9 @@ export function* onGetFilter(action) {
 
 
 export default function* originsSaga() {
-    yield takeEvery(FETCH_ORIGINS, onGetOrigins)
-    yield takeEvery(FETCH_FILTER, onGetFilter)
-    yield debounce(2000, [MINPRICE_CHANGE,MAXPRICE_CHANGE], onGetPrice)
-    yield takeEvery(ORIGIN_CHANGE, onCheckOrigin)
+    yield takeEvery(ORIGINS_FETCH_ORIGINS, onGetOrigins)
+    yield takeEvery(ORIGINS_FETCH_FILTER, onGetFilter)
+    yield debounce(2000, [ORIGINS_MINPRICE_CHANGE, ORIGINS_MAXPRICE_CHANGE], onGetPrice)
+    yield takeEvery(ORIGINS_ORIGIN_CHANGE, onCheckOrigin)
     // yield takeLatest("PRODUCTS/FETCH_SUCCESS", onFetchSuccess)
-
 }

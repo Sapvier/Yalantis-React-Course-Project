@@ -5,7 +5,7 @@ import uuid from "react-uuid";
 import {useFormik} from 'formik'
 import {useInjectSaga} from "../../store/injectSaga";
 import productsFormSaga from "../../store/form/saga";
-import {POST_PROCESSING} from "../../store/form/types";
+import {postProcessing} from "../../store/form/actions";
 
 
 function AddItemForm({onClose}) {
@@ -19,10 +19,7 @@ function AddItemForm({onClose}) {
             origin: 'africa',
         },
         onSubmit: values => {
-            dispatch({
-                type: POST_PROCESSING,
-                payload: {path: `/products`, method: 'POST', filter: '', data: JSON.stringify({product: {...values}})}
-            })
+            dispatch(postProcessing({path: `/products`, method: 'POST', filter: '', data: JSON.stringify({product: {...values}})}))
             onClose()
         },
         validate: values => {

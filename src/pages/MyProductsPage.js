@@ -1,15 +1,13 @@
 import React, {useEffect} from 'react';
 import "../components/items/ItemsList.css";
-import {connect, useDispatch, useSelector} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import MyItemsList from "../components/items/MyItemsList";
 import SideBar from "../components/sidebar/SideBar";
 import productsSaga from "../store/products/saga";
 import {useInjectSaga} from "../store/injectSaga";
-import {FETCH_LOADING,} from "../store/products/types";
 import {filter, getProducts} from "../store/products/selector";
 import withHeaderAndFooter from "../HOC/withHeaderAndFooter";
-import {PATCH_SUCCESS} from "../store/form/types";
-import {patchSuccess} from "../store/form/actions";
+import {fetchLoading} from "../store/products/actions";
 
 
 function MyProductsPage({filterItems, products}) {
@@ -18,14 +16,13 @@ function MyProductsPage({filterItems, products}) {
     const isEditable = true
 
     useEffect(() => {
-        dispatch({
-            type: FETCH_LOADING, payload: {
+        dispatch(fetchLoading({
                 path: `/products`,
                 method: 'GET',
                 data: null,
                 filter: `?page=${filterItems.currentPage}&perPage=${filterItems.perPage}&origins=${filterItems.origin}&minPrice=${filterItems.minPrice}&maxPrice=${filterItems.maxPrice}&editable=${isEditable}`
-            }
-        })
+            })
+        )
     }, [])
 
     return (

@@ -1,34 +1,36 @@
 import {
-    FETCH_ERROR, FETCH_LOADING,
-    FETCH_SUCCESS,
-    SAVE_PRODUCTS,
-    UPDATE_ITEM
+    PRODUCTS_FETCH_ERROR,
+    PRODUCTS_FETCH_LOADING,
+    PRODUCTS_FETCH_SUCCESS,
+    PRODUCTS_SAVE_PRODUCTS,
+    PRODUCTS_UPDATE_ITEM
 } from "./types";
 
 export function saveProducts(products) {
     return {
-        type: SAVE_PRODUCTS,
+        type: PRODUCTS_SAVE_PRODUCTS,
         payload: products
     }
 }
 export const fetchSuccess = () => {
     return {
-        type: FETCH_SUCCESS
+        type: PRODUCTS_FETCH_SUCCESS
     }
 }
 export const fetchError = () => {
     return {
-        type: FETCH_ERROR
+        type: PRODUCTS_FETCH_ERROR
     }
 }
-export const fetchLoading = () => {
+export const fetchLoading = (payload) => {
     return {
-        type: FETCH_LOADING
+        type: PRODUCTS_FETCH_LOADING,
+        payload: payload
     }
 }
 export const updateItem = (item) => {
     return {
-        type: UPDATE_ITEM,
+        type: PRODUCTS_UPDATE_ITEM,
         payload: item
     }
 }

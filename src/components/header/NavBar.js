@@ -7,11 +7,9 @@ import AddItemModal from "./AddItemModal";
 import AddItemForm from "./AddItemForm";
 
 
-
 function NavBar() {
     const [isOpen, setIsOpen] = useState(false)
     const addedItems = useSelector(state => state.cartReducer.items)
-
 
     return (
         <nav>

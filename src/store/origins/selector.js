@@ -1,6 +1,4 @@
-import {select} from "redux-saga/effects";
 import {getFilter} from "../pagination/selector";
-
 export const getOrigins = state => state.filterReducer.origin
 export const getPrice = state => state.filterReducer.price
 
@@ -29,10 +27,7 @@ export const getOriginsArray = state => {
     })
     return origin;
 }
-export const getOriginsString = state => {
-    const origins = getOriginsArray(state)
-    return origins.join();
-}
+
 export const getFilterItems = state => {
     const origins = getOriginsArray(state)
     const pages = getFilter(state)

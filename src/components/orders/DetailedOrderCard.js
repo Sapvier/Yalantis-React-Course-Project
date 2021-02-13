@@ -6,7 +6,6 @@ function DetailedOrderCard({order}) {
     const products = order.pieces || []
     const date = order.createdAt || ""
 
-
     return (
         <div className="detailedItemCard">
             <div className="detailedItemCardContent">

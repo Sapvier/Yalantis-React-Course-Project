@@ -6,7 +6,6 @@ import {useHistory} from "react-router-dom";
 
 function MyOrders({orders}) {
     const history = useHistory()
-
     const handleClick = useCallback((id) => {
         return history.push(`/orders/${id}`)
     }, []);

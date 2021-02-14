@@ -1,9 +1,8 @@
 import React, {useCallback} from 'react';
-import {totalSum} from "../../utils/services/cartCounter/total";
 import "./ShoppingCart.css"
 import CartItem from "./CartItem";
-import {connect, useDispatch} from "react-redux";
-import {getCartItems} from "../../store/cart/selector";
+import {connect, useDispatch, useSelector} from "react-redux";
+import {getCartItems, totalSum} from "../../store/cart/selector";
 import {NavLink} from "react-router-dom";
 import {
     addToCart,
@@ -13,7 +12,7 @@ import {
 } from "../../store/cart/actions";
 
 
-function ShoppingCart({cartItems}) {
+function ShoppingCart({cartItems, total}) {
     const dispatch = useDispatch()
     const handleSubstractClick = useCallback((item) => {
         if (item.quantity < 2) {
@@ -41,11 +40,12 @@ function ShoppingCart({cartItems}) {
                 }})
         }))
     }
+    console.log(total)
 
     return (
         <div className="shoppingCart">
             <NavLink to="/" className="backHome">Home</NavLink>
-            <div className="shoppingCartTotal">Cart Subtotal: {totalSum(cartItems)}</div>
+            <div className="shoppingCartTotal">Cart Subtotal: {total}</div>
             <div className="shoppingCartItems">
                 {cartItems
                     .map(item => <CartItem
@@ -64,7 +64,8 @@ function ShoppingCart({cartItems}) {
 
 const mapStateToProps = (state) => {
     return {
-        cartItems: getCartItems(state)
+        cartItems: getCartItems(state),
+        total: totalSum(state)
     }
 }
 export default connect(mapStateToProps, null)(ShoppingCart)

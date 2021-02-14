@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 import {NavLink} from "react-router-dom";
-import {totalSum} from "../../utils/services/cartCounter/total";
 import "../header/NavBar.css";
 import {useSelector} from "react-redux";
 import AddItemModal from "./AddItemModal";
 import AddItemForm from "./AddItemForm";
+import {totalSum} from "../../store/cart/selector";
 
 
 function NavBar() {
     const [isOpen, setIsOpen] = useState(false)
-    const addedItems = useSelector(state => state.cartReducer.items)
+    const total = useSelector(totalSum)
 
     return (
         <nav>
@@ -25,7 +25,7 @@ function NavBar() {
                     <NavLink to="/cart" className="navbarLink">
                         <button className="cartButton">Shopping Cart &#x1f6d2;</button>
                     </NavLink>
-                    <div className="total">Cart Subtotal: {totalSum(addedItems)}</div>
+                    <div className="total">Cart Subtotal: {total}</div>
                 </div>
             </div>
         </nav>

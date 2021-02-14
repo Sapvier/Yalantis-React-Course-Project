@@ -6,7 +6,7 @@ import withHeaderAndFooter from "../HOC/withHeaderAndFooter";
 import {useInjectSaga} from "../store/injectSaga";
 import detailedOrderSaga from "../store/detailedOrder/saga";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchOrder} from "../store/detailedOrder/actions";
+import {fetchOrderLoading} from "../store/detailedOrder/actions";
 
 
 function DetailedOrderPage() {
@@ -16,7 +16,12 @@ function DetailedOrderPage() {
     const order = useSelector(state => state.detailedOrderReducer.order)
 
     useEffect(() => {
-        dispatch(fetchOrder(location.pathname))
+        dispatch(fetchOrderLoading({
+            path: `${location.pathname}`,
+            method: 'GET',
+            data: null,
+            filter: ''
+        }))
     }, [])
 
     return (

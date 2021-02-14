@@ -1,11 +1,12 @@
 import {takeEvery, call, put} from 'redux-saga/effects'
-import {DETAILED_ORDER_FETCH_ORDER} from "./types";
+import {DETAILED_ORDER_FETCH} from "./types";
 import {fetchError, fetchSuccess, saveOrder} from "./actions";
+import {fetchItems} from "../products/saga";
 
 
 export function* onGetOrder(action) {
     try {
-        const order = yield call(fetchOrder, action.payload)
+        const order = yield call(fetchItems, action.payload)
         yield put(saveOrder(order));
         yield put(fetchSuccess())
     } catch (e) {
@@ -13,19 +14,9 @@ export function* onGetOrder(action) {
     }
 }
 
-export const fetchOrder = async (location) => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}${location}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `${process.env.REACT_APP_API_KEY}`,
-        },
-    })
-    return response.json()
-}
 
 export default function* detailedOrderSaga() {
-    yield takeEvery(DETAILED_ORDER_FETCH_ORDER, onGetOrder)
+    yield takeEvery(DETAILED_ORDER_FETCH, onGetOrder)
 }
 
 

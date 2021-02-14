@@ -1,14 +1,12 @@
 import React from 'react';
 import "../card/ItemCard.css";
 import {useDispatch, useSelector} from "react-redux";
-import {addItem, addQuantity, removeFromCart} from "../../store/cart/actions";
+import {addToCart} from "../../store/cart/actions";
 
 
 function DetailedItemCard({item}) {
     const dispatch = useDispatch()
-    const duplicates = useSelector(state => state.cartReducer.items)
-    let itemAdded = duplicates.find(duplicate => duplicate.name === item.name)
-
+    const cartItems = useSelector(state => state.cartReducer.items)
     return (
         <div className="detailedItemCard">
             <div className="detailedItemCardContent">
@@ -18,15 +16,7 @@ function DetailedItemCard({item}) {
             </div>
             <div className="buttonContainer">
                 <button className="buyButton"
-                        onClick={() => {
-                            if (itemAdded) {
-                                dispatch(removeFromCart(itemAdded))
-                                dispatch(addQuantity(itemAdded))
-                            } else {
-                                dispatch(removeFromCart(item))
-                                dispatch(addItem(item, 1))
-                            }
-                        }}
+                        onClick={() => dispatch(addToCart(cartItems, item))}
                 >Buy
                 </button>
             </div>

@@ -3,6 +3,7 @@ import {rootReducer} from './rootReducer';
 import rootSaga from './rootSaga';
 import createSagaMiddleware from 'redux-saga';
 import {composeWithDevTools} from "redux-devtools-extension";
+import thunk from "redux-thunk";
 
 
 function createSagaInjector(runSaga, rootSaga) {
@@ -30,7 +31,7 @@ function createSagaInjector(runSaga, rootSaga) {
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = createStore(rootReducer, composeWithDevTools(
-    applyMiddleware(sagaMiddleware)
+    applyMiddleware(sagaMiddleware, thunk)
 ));
 
 

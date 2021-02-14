@@ -1,4 +1,5 @@
 import {
+    DETAILED_CARD_FETCH,
     DETAILED_CARD_FETCH_ERROR,
     DETAILED_CARD_FETCH_ITEM,
     DETAILED_CARD_FETCH_SUCCESS,
@@ -24,7 +25,7 @@ export const detailedItemReducer = (state = initialState, action) => {
         case DETAILED_CARD_FETCH_ERROR: {
             return {...state, fetch: "error"}
         }
-        case DETAILED_CARD_FETCH_ITEM: {
+        case DETAILED_CARD_FETCH: {
             return {...state, fetch: "fetching"}
         }
     }

@@ -39,19 +39,18 @@ function SideBar({origins, isEditable, filterItems, originsArray}) {
             })
         } else originsArr.push(origin.value)
 
-        const dispatch = dispatch(originChange({
+        return [dispatch(originChange({
             origin,
             path: `/products`,
             method: 'GET',
             data: null,
             filterItems,
             isEditable
-        }))
-        const replace = history.replace({
+        })),
+        history.replace({
             pathname: `${location.pathname}`,
             search: `minPrice=${filterItems.minPrice}&maxPrice=${filterItems.maxPrice}&origin=${originsArr.join()}`
-        })
-        return [dispatch, replace]
+        })]
     }, []);
 
 
@@ -91,7 +90,7 @@ function SideBar({origins, isEditable, filterItems, originsArray}) {
 
     return (
         <aside className="side">
-            <form onClick={() => console.log(true)}>
+            <form>
                 <p>Origin:</p>
                 {origins.map(origin =>
                     <Origin

@@ -9,7 +9,6 @@ import {filter, getProducts} from "../store/products/selector";
 import withHeaderAndFooter from "../HOC/withHeaderAndFooter";
 import {useLocation} from "react-router-dom";
 import {fetchLoading} from "../store/products/actions";
-
 const queryString = require('query-string');
 
 

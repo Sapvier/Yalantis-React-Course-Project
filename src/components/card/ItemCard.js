@@ -1,14 +1,8 @@
 import React from 'react';
 import "../card/ItemCard.css";
-import {addItem, addQuantity, removeFromCart} from "../../store/cart/actions";
-import {useDispatch, useSelector} from "react-redux";
 
 
-function ItemCard({item, handleClick}) {
-    const dispatch = useDispatch()
-    const duplicates = useSelector(state => state.cartReducer.items)
-    let itemAdded = duplicates.find(duplicate => duplicate.name === item.name)
-
+function ItemCard({item, handleClick, handleAddClick}) {
     return (
         <div className="itemCard">
             <div onClick={() => handleClick(item.id)} className="itemCardContent">
@@ -17,15 +11,10 @@ function ItemCard({item, handleClick}) {
                 <p>Origin: {item.origin}</p>
             </div>
             <div className="buttonContainer">
-                <button className="buyButton" onClick={() => {
-                    if (itemAdded) {
-                        dispatch(removeFromCart(itemAdded))
-                        dispatch(addQuantity(itemAdded))
-                    } else {
-                        dispatch(removeFromCart(item))
-                        dispatch(addItem(item, 1))
-                    }
-                }}>Buy
+                <button className="buyButton" onClick={() =>
+                    handleAddClick(item)
+                }
+                >Buy
                 </button>
             </div>
         </div>

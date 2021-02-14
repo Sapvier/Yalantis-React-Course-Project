@@ -21,8 +21,9 @@ export const fetchOrdersError = () => {
         type: ORDERS_FETCH_ERROR
     }
 }
-export const fetchOrdersLoading = () => {
+export const fetchOrdersLoading = (payload) => {
     return {
-        type: ORDERS_FETCH_ORDERS
+        type: ORDERS_FETCH_ORDERS,
+        payload: payload
     }
 }

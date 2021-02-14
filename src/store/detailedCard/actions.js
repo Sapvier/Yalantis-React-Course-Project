@@ -1,8 +1,10 @@
 import {
+    DETAILED_CARD_FETCH,
     DETAILED_CARD_FETCH_ERROR,
     DETAILED_CARD_FETCH_ITEM,
     DETAILED_CARD_FETCH_SUCCESS,
     DETAILED_CARD_SAVE_ITEM
+
 } from "./types";
 
 export function saveItem(item) {
@@ -21,8 +23,9 @@ export const fetchError = () => {
         type: DETAILED_CARD_FETCH_ERROR
     }
 }
-export const fetchItem = () => {
+export const fetchItemLoading = (payload) => {
     return {
-        type: DETAILED_CARD_FETCH_ITEM
+        type: DETAILED_CARD_FETCH,
+        payload: payload
     }
 }

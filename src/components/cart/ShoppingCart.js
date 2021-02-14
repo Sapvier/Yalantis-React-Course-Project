@@ -6,13 +6,11 @@ import {connect, useDispatch} from "react-redux";
 import {getCartItems} from "../../store/cart/selector";
 import {NavLink} from "react-router-dom";
 import {
-    cartBuyItem,
-    removeFromCart,
-    removeQuantity,
+    addToCart,
+    removeFromCart, removeQuantity,
     saveOrder,
     setQuantity
 } from "../../store/cart/actions";
-
 
 
 function ShoppingCart({addedItems, cartItems}) {
@@ -22,24 +20,22 @@ function ShoppingCart({addedItems, cartItems}) {
         if (item.quantity < 2) {
             return dispatch(removeFromCart(item))
         } else {
-            return [dispatch(removeFromCart(item)),
-            dispatch(removeQuantity(item))]
+            return dispatch(removeQuantity(item))
         }
     }, []);
 
     const handleAddClick = useCallback((item) => {
-        return [dispatch(cartBuyItem(item)),
-        dispatch(removeFromCart(item))]
+        return dispatch(addToCart(cartItems, item))
     }, []);
 
     const removeClick = useCallback((item) => {
         return dispatch(removeFromCart(item))
     }, []);
 
-    const changeHandler = useCallback((e, item) => {
-        return [dispatch(removeFromCart(item)),
-        dispatch(setQuantity({...item, quantity: e.target.value}))]
+    const changeHandler = useCallback((item) => {
+        return dispatch(setQuantity(item))
     }, []);
+
 
     const clickHandler = () => {
         let cart = []
@@ -57,7 +53,6 @@ function ShoppingCart({addedItems, cartItems}) {
             }
         ))
     }
-    console.log(cartItems)
 
     return (
         <div className="shoppingCart">

@@ -11,10 +11,9 @@ function CartItem({item, handleSubstractClick, handleAddClick, changeHandler, re
                 if (item.quantity >= 2)
                     setCount(count - 1)
             }}>&#8722;</span>
-            <input type="number" className="shoppingCartItemQuantity" value={count} onInput={() => (e, item) => {
+            <input type="number" className="shoppingCartItemQuantity" value={count} onInput={(e) => {
                 setCount(e.target.value)
-                changeHandler(item)
-            }
+                changeHandler({...item, quantity: parseInt(e.target.value)})}
             }/>
             <span onClick={() => {
                 handleAddClick(item)

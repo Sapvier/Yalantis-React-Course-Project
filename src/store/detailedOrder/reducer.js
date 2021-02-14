@@ -1,6 +1,6 @@
 import {
+    DETAILED_ORDER_FETCH,
     DETAILED_ORDER_FETCH_ERROR,
-    DETAILED_ORDER_FETCH_ORDER,
     DETAILED_ORDER_FETCH_SUCCESS,
     DETAILED_ORDER_SAVE_ORDER
 } from "./types";
@@ -24,7 +24,7 @@ export const detailedOrderReducer = (state = initialState, action) => {
         case DETAILED_ORDER_FETCH_ERROR: {
             return {...state, fetch: "error"}
         }
-        case DETAILED_ORDER_FETCH_ORDER: {
+        case DETAILED_ORDER_FETCH: {
             return {...state, fetch: "fetching"}
         }
     }

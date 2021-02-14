@@ -6,7 +6,7 @@ import withHeaderAndFooter from "../HOC/withHeaderAndFooter";
 import {useInjectSaga} from "../store/injectSaga";
 import detailedItemSaga from "../store/detailedCard/saga";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchItem} from "../store/detailedCard/actions";
+import {fetchItemLoading} from "../store/detailedCard/actions";
 
 
 function DetailedItemPage() {
@@ -16,8 +16,16 @@ function DetailedItemPage() {
     let location = useLocation();
 
     useEffect(() => {
-        dispatch(fetchItem(location.pathname))
+        dispatch(
+            fetchItemLoading({
+                path: `${location.pathname}`,
+                method: 'GET',
+                data: null,
+                filter: ''
+            })
+        )
     }, [])
+
 
     return (
         <div>

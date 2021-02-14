@@ -1,28 +1,37 @@
 import {
-    CART_ADD_ITEM, CART_BUY_ITEM,
-    CART_CLEAR_CART, CART_ITEM_QUANTITY,
+    CART_BUY_ITEM,
+    CART_CLEAR_CART,
     CART_REMOVE,
+    CART_REMOVE_QUANTITY,
     CART_SAVE_ERROR,
     CART_SAVE_ORDER,
-    CART_SAVE_SUCCESS
+    CART_SAVE_SUCCESS, CART_SET_QUANTITY
 } from "./types";
 
 
 const initialState = {
     items: [],
     fetch: "pending",
-    post: "pending"
+    post: "pending",
+    total: 0
 }
 
 export const cartReducer = (state = initialState, action) => {
     switch (action.type) {
         default:
             return state
-        case CART_ADD_ITEM: {
-                return {...state, items: state.items.concat([action.payload])}
+        case CART_BUY_ITEM: {
+            return {... state, items: action.payload.cartItems}
         }
-        case CART_ITEM_QUANTITY: {
-                return {...state, items: state.items.concat([action.payload])}
+        case CART_SET_QUANTITY: {
+                return {
+                    ...state,
+                    items: state.items.map(item => item.id === action.payload.id ? {...item, quantity: action.payload.quantity} : item)}
+        }
+        case CART_REMOVE_QUANTITY: {
+                return {
+                    ...state,
+                    items: state.items.map(item => item.id === action.payload.id ? {...item, quantity: action.payload.quantity} : item)}
         }
         case CART_REMOVE: {
             return {...state, items: state.items.filter(item => item.id !== action.payload.id)}

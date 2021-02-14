@@ -7,6 +7,7 @@ import {useInjectSaga} from "../../store/injectSaga";
 import pagesSaga from "../../store/pagination/saga";
 import Pagination from "react-js-pagination";
 import {fetchLoading} from "../../store/products/actions";
+import {pagelimitChange} from "../../store/pagination/actions";
 
 
 function Footer({filterItems, isEditable, filter}) {
@@ -14,7 +15,7 @@ function Footer({filterItems, isEditable, filter}) {
     const dispatch = useDispatch()
 
     const changeHandler = (e) => {
-        dispatch(fetchLoading({
+        dispatch(pagelimitChange({
                 path: `/products`,
                 method: 'GET',
                 data: null,

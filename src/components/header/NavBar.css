@@ -97,10 +97,15 @@
 }
 
 .formControl {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
     margin-bottom: 20px;
 }
 .error {
-    font-size: 12px;
+    width: 100%;
+    font-size: 10px;
     color: red;
 }
 .selector {

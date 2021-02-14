@@ -5,25 +5,11 @@ import {
     DETAILED_ORDER_SAVE_ORDER
 } from "./types";
 
-export function saveOrder(item) {
-    return {
-        type: DETAILED_ORDER_SAVE_ORDER,
-        payload: item
-    }
-}
-export const fetchSuccess = () => {
-    return {
-        type: DETAILED_ORDER_FETCH_SUCCESS
-    }
-}
-export const fetchError = () => {
-    return {
-        type: DETAILED_ORDER_FETCH_ERROR
-    }
-}
-export const fetchOrderLoading = (payload) => {
-    return {
-        type: DETAILED_ORDER_FETCH,
-        payload: payload
-    }
-}
+export const saveOrder = (payload) => ({type: DETAILED_ORDER_SAVE_ORDER, payload})
+
+export const fetchOrderLoading = (payload) => ({type: DETAILED_ORDER_FETCH, payload})
+
+export const fetchSuccess = () => ({type: DETAILED_ORDER_FETCH_SUCCESS})
+
+export const fetchError = () => ({type: DETAILED_ORDER_FETCH_ERROR})
+

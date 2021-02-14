@@ -10,7 +10,6 @@ import {patchProcessing} from "../../store/form/actions";
 
 function EditItemForm({item, onClose}) {
     useInjectSaga('productsFormSaga', productsFormSaga)
-
     const origins = useSelector(state => state.filterReducer.origin)
     const dispatch = useDispatch()
     const formik = useFormik({

@@ -6,31 +6,12 @@ import {
     PRODUCTS_UPDATE_ITEM
 } from "./types";
 
-export function saveProducts(products) {
-    return {
-        type: PRODUCTS_SAVE_PRODUCTS,
-        payload: products
-    }
-}
-export const fetchSuccess = () => {
-    return {
-        type: PRODUCTS_FETCH_SUCCESS
-    }
-}
-export const fetchError = () => {
-    return {
-        type: PRODUCTS_FETCH_ERROR
-    }
-}
-export const fetchLoading = (payload) => {
-    return {
-        type: PRODUCTS_FETCH_LOADING,
-        payload: payload
-    }
-}
-export const updateItem = (item) => {
-    return {
-        type: PRODUCTS_UPDATE_ITEM,
-        payload: item
-    }
-}
+export const saveProducts =(payload) => ({type: PRODUCTS_SAVE_PRODUCTS, payload})
+
+export const updateItem =(payload) => ({type: PRODUCTS_UPDATE_ITEM, payload})
+
+export const fetchLoading =(payload) => ({type: PRODUCTS_FETCH_LOADING, payload})
+
+export const fetchSuccess =() => ({type: PRODUCTS_FETCH_SUCCESS})
+
+export const fetchError =() => ({type: PRODUCTS_FETCH_ERROR})

@@ -21,7 +21,7 @@ export const cartReducer = (state = initialState, action) => {
         default:
             return state
         case CART_BUY_ITEM: {
-            return {... state, items: action.payload.cartItems}
+            return {... state, items: action.payload.cart}
         }
         case CART_SET_QUANTITY: {
                 return {

@@ -18,56 +18,22 @@ export const addOrigins = (origins) => {
         payload: origins.map(item => ({...item, isChecked: false}))
     }
 }
-export const checkOrigin = (origin) => {
-    return {
-        type: ORIGINS_CHECK_ORIGIN,
-        payload: origin
-    }
-}
-export const setPrice = (price) => {
-    return {
-        type: ORIGINS_SET_PRICE,
-        payload: price
-    }
-}
-export const fetchOriginsSuccess = () => {
-    return {
-        type: ORIGINS_FETCH_SUCCESS
-    }
-}
-export const fetchOriginsFail = () => {
-    return {
-        type: ORIGINS_FETCH_FAIL
-    }
-}
-export const fetchingOrigins = (payload) => {
-    return {
-        type: ORIGINS_FETCH_ORIGINS,
-        payload: payload
-    }
-}
-export const originChange = (payload) => {
-    return {
-        type: ORIGINS_ORIGIN_CHANGE,
-        payload: payload
-    }
-}
-export const minPriceChange = (payload) => {
-    return {
-        type: ORIGINS_MINPRICE_CHANGE,
-        payload: payload
-    }
-}
-export const maxPriceChange = (payload) => {
-    return {
-        type: ORIGINS_MAXPRICE_CHANGE,
-        payload: payload
-    }
-}
+export const checkOrigin = (payload) => ({type: ORIGINS_CHECK_ORIGIN, payload})
 
-export const fetchFiltered = (payload) => {
-    return {
-        type: ORIGINS_UNCHECK_ORIGIN,
-        payload: payload
-    }
-}
+export const setPrice = (payload) => ({type: ORIGINS_SET_PRICE, payload})
+
+export const fetchOriginsSuccess = () => ({type: ORIGINS_FETCH_SUCCESS})
+
+export const fetchOriginsFail = () => ({type: ORIGINS_FETCH_FAIL})
+
+export const fetchingOrigins = (payload) => ({type: ORIGINS_FETCH_ORIGINS, payload})
+
+export const originChange = (payload) => ({type: ORIGINS_ORIGIN_CHANGE, payload})
+
+export const minPriceChange = (payload) => ({type: ORIGINS_MINPRICE_CHANGE, payload})
+
+export const maxPriceChange = (payload) => ({type: ORIGINS_MAXPRICE_CHANGE, payload})
+
+export const fetchFiltered = (payload) => ({type: ORIGINS_UNCHECK_ORIGIN, payload})
+
+

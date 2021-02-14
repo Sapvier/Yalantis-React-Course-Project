@@ -1,7 +1,8 @@
-import {takeEvery, call, put} from 'redux-saga/effects'
-import {clearCart, removeFromCart, saveOrderError, saveOrderSuccess} from './actions';
-import {CART_ADD_ITEM, CART_ITEM_QUANTITY, CART_SAVE_ORDER} from "./types";
+import {takeEvery, call, put, select} from 'redux-saga/effects'
+import {buyItem, clearCart, saveOrderError, saveOrderSuccess} from './actions';
+import {ADD_TO_CART, CART_SAVE_ORDER} from "./types";
 import {fetchItems} from "../products/saga";
+import {getCartItems} from "./selector";
 
 
 export function* onSaveOrder(action) {
@@ -13,14 +14,26 @@ export function* onSaveOrder(action) {
         yield put(saveOrderError())
     }
 }
-export function* onAddItem(payload) {
-    yield put(removeFromCart(payload))
+export function* onAddItem(action) {
+   const cart = yield select(getCartItems)
+    let productAlreadyInCart = false;
+    cart.forEach((item) => {
+        if (item.id === action.payload.id) {
+            item.quantity += 1;
+            productAlreadyInCart = true;
+        }
+    });
+    if (!productAlreadyInCart) {
+        cart.push({ ...action.payload, quantity: 1 });
+    }
+    yield put(buyItem({cart}))
 }
+
 
 
 export default function* cartSaga() {
     yield takeEvery(CART_SAVE_ORDER, onSaveOrder)
-    // yield takeEvery([CART_ADD_ITEM, CART_ITEM_QUANTITY], onAddItem)
+    yield takeEvery(ADD_TO_CART, onAddItem)
 }
 
 

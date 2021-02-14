@@ -1,9 +1,9 @@
 import { takeEvery, call, put } from 'redux-saga/effects'
 import {saveItemsCount, setCurrentLimit, setCurrentPage} from "./actions";
 import {fetchItems} from "../products/saga";
-import {fetchError, fetchSuccess, saveProducts} from "../products/actions";
+import {fetchError, fetchLoading, fetchSuccess, saveProducts} from "../products/actions";
 import {PRODUCTS_FETCH_LOADING} from "../products/types";
-import {PAGINATION_FETCH_PAGELIMIT} from "./types";
+import {PAGINATION_PAGELIMIT_CHANGE} from "./types";
 
 export function* onGetPagedProducts(action) {
     try {
@@ -18,6 +18,7 @@ export function* onGetPagedProducts(action) {
 }
 export function* onGetLimitedProducts(action) {
     try {
+        yield put(fetchLoading())
         const origins = yield call(fetchItems, action.payload)
         yield put(setCurrentLimit(action.payload.perPage));
         yield put(saveProducts(origins.items));
@@ -30,7 +31,8 @@ export function* onGetLimitedProducts(action) {
 
 export default function* pagesSaga() {
     yield takeEvery(PRODUCTS_FETCH_LOADING, onGetPagedProducts)
-    yield takeEvery(PAGINATION_FETCH_PAGELIMIT, onGetLimitedProducts)
+    yield takeEvery(PAGINATION_PAGELIMIT_CHANGE, onGetLimitedProducts)
+
 }
 
 

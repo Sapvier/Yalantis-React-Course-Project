@@ -13,9 +13,8 @@ import {
 } from "../../store/cart/actions";
 
 
-function ShoppingCart({addedItems, cartItems}) {
+function ShoppingCart({cartItems}) {
     const dispatch = useDispatch()
-
     const handleSubstractClick = useCallback((item) => {
         if (item.quantity < 2) {
             return dispatch(removeFromCart(item))
@@ -24,18 +23,9 @@ function ShoppingCart({addedItems, cartItems}) {
         }
     }, []);
 
-    const handleAddClick = useCallback((item) => {
-        return dispatch(addToCart(cartItems, item))
-    }, []);
-
-    const removeClick = useCallback((item) => {
-        return dispatch(removeFromCart(item))
-    }, []);
-
-    const changeHandler = useCallback((item) => {
-        return dispatch(setQuantity(item))
-    }, []);
-
+    const handleAddClick = useCallback((item) => {dispatch(addToCart(item))}, []);
+    const removeClick = useCallback((item) => {dispatch(removeFromCart(item))}, []);
+    const changeHandler = useCallback((item) => {dispatch(setQuantity(item))}, []);
 
     const clickHandler = () => {
         let cart = []
@@ -48,24 +38,24 @@ function ShoppingCart({addedItems, cartItems}) {
                 path: `/orders`, method: 'POST', filter: '', cart, data: JSON.stringify({
                     order: {
                         pieces: [...cart]
-                    }
-                })
-            }
-        ))
+                }})
+        }))
     }
 
     return (
         <div className="shoppingCart">
             <NavLink to="/" className="backHome">Home</NavLink>
-            <div className="shoppingCartTotal">Cart Subtotal: {totalSum(addedItems)}</div>
+            <div className="shoppingCartTotal">Cart Subtotal: {totalSum(cartItems)}</div>
             <div className="shoppingCartItems">
-                {addedItems.map(item => <CartItem key={item.id}
-                                                  item={item}
-                                                  handleSubstractClick={handleSubstractClick}
-                                                  handleAddClick={handleAddClick}
-                                                  changeHandler={changeHandler}
-                                                  removeClick={removeClick}
-                                                  className="shoppingCartName"/>)}
+                {cartItems
+                    .map(item => <CartItem
+                        key={item.id}
+                        item={item}
+                        handleSubstractClick={handleSubstractClick}
+                        handleAddClick={handleAddClick}
+                        changeHandler={changeHandler}
+                        removeClick={removeClick}
+                        className="shoppingCartName"/>)}
                 {cartItems.length > 0 && <button className="checkOutButton" onClick={clickHandler}>Buy</button>}
             </div>
         </div>

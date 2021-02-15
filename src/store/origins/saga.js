@@ -35,7 +35,11 @@ export function* onGetOrigins(action) {
 export function* onGetPrice(action) {
     try {
         yield put(setPrice(action.payload.price))
-        const origins = yield call(fetchItems, action.payload)
+        const filterItems = yield {
+            path: `/products`,
+            method: 'GET',
+            filter: `?page=${action.payload.filterItems.currentPage}&perPage=${action.payload.filterItems.perPage}&origins=${action.payload.filterItems.origin}&minPrice=${action.payload.price.minPrice}&maxPrice=${action.payload.price.maxPrice}&editable=${action.payload.isEditable}`}
+        const origins = yield call(fetchItems, filterItems)
         yield put(fetchSuccess())
         yield put(saveProducts(origins.items));
         yield put(saveItemsCount(origins.totalItems))

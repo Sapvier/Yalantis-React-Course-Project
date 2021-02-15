@@ -24,7 +24,12 @@ function EditItemForm({item, onClose}) {
                         path: `/products/${item.id}`,
                         method: 'PATCH',
                         filter: '',
-                        data: JSON.stringify({product: {...values}})
+                        data: JSON.stringify({product: {...values}}),
+                        item: {...item,
+                            name: formik.values.name,
+                            price: formik.values.price,
+                            origin: formik.values.origin
+                        }
                     }
                 ))
             onClose()

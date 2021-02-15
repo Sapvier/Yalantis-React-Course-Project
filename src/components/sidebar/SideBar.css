@@ -28,4 +28,14 @@ aside {
     margin: 5px;
     width: 35px
 }
+.priceRange {
+    margin-top: 10px;
+}
+.priceBlock {
+    border-top: 1px lightgrey solid;
+    border-bottom: 1px lightgrey solid;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    padding-top: 5px;
+}
 

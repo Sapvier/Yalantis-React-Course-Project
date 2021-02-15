@@ -13,7 +13,6 @@ import {pagelimitChange} from "../../store/pagination/actions";
 function Footer({filterItems, isEditable, filter}) {
     useInjectSaga('pagesSaga', pagesSaga)
     const dispatch = useDispatch()
-
     const changeHandler = (e) => {
         dispatch(pagelimitChange({
                 path: `/products`,

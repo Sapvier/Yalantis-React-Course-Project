@@ -56,14 +56,12 @@ function SideBar({origins, isEditable, filterItems, originsArray}) {
 
     const minHandleChange = (e) => {
         dispatch(minPriceChange({
-            path: `/products`,
-            method: 'GET',
-            data: null,
+            filterItems,
+            isEditable,
             price: {
                 maxPrice: filterItems.maxPrice,
                 minPrice: e.target.value,
-            },
-            filter: `?page=${filterItems.currentPage}&perPage=${filterItems.perPage}&origins=${filterItems.origin}&minPrice=${e.target.value}&maxPrice=${filterItems.maxPrice}&editable=${isEditable}`
+            }
         }))
         history.replace({
             pathname: `${location.pathname}`,
@@ -73,14 +71,12 @@ function SideBar({origins, isEditable, filterItems, originsArray}) {
 
     const maxHandleChange = (e) => {
         dispatch(maxPriceChange({
-            path: `/products`,
-            method: 'GET',
-            data: null,
+            filterItems,
+            isEditable,
             price: {
                 maxPrice: e.target.value,
                 minPrice: filterItems.minPrice
-            },
-            filter: `?page=${filterItems.currentPage}&perPage=${filterItems.perPage}&origins=${filterItems.origin}&minPrice=${filterItems.minPrice}&maxPrice=${e.target.value}&editable=${isEditable}`
+            }
         }))
         history.replace({
             pathname: `${location.pathname}`,
@@ -91,7 +87,7 @@ function SideBar({origins, isEditable, filterItems, originsArray}) {
     return (
         <aside className="side">
             <form>
-                <p>Origin:</p>
+                <p>Origin</p>
                 {origins.map(origin =>
                     <Origin
                         className="origin"
@@ -101,8 +97,8 @@ function SideBar({origins, isEditable, filterItems, originsArray}) {
                         changeHandler={changeHandler}
                         originsArray={originsArray}
                     />)}
-                <div>Price
-                    <div>
+                <div className="priceBlock">Price
+                    <div className="priceRange">
                         <input type="number"
                                className="sideBarPrice"
                                name="minPrice"

@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding-top: 10px;
+    height: 40px;
     border-top: 1px solid black;
     margin-left: 160px;
 }
@@ -48,7 +48,7 @@
 }
 .selector {
     float: right;
-    height: 30px;
+    height: 25px;
     width: 5%;
 }
 .pageFocused {

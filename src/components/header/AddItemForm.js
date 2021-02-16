@@ -72,7 +72,8 @@ function AddItemForm({onClose}) {
                     {formik.touched.price && formik.errors.price ?
                         <div className="error">{formik.errors.price}</div> : null}
                 </div>
-                <div className="selector"> Origin:
+                <div className="selector">
+                    <p>Origin: </p>
                     <select name="origin"
                             onChange={formik.handleChange}
                             value={formik.values.origin}>

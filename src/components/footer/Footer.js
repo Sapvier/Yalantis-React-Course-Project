@@ -40,7 +40,7 @@ function Footer({filterItems, isEditable, filter}) {
                 currentPage: filterItems.currentPage === Math.ceil(filter.totalItems / filterItems.perPage) ? filterItems.currentPage : filterItems.currentPage + 1,
                 method: 'GET',
                 data: null,
-                filter: `?page=${filterItems.currentPage === Math.ceil(filter.totalItems / filterItems.perPage) ? filterItems.currentPage : filterItems.currentPage + 1}&perPage=${filterItems.perPage}&origins=${filterItems.origin}&minPrice=${filterItems.minPrice}&maxPrice=${filterItems.maxPrice}&editable=${isEditable}`
+                filter: `?page=${(filterItems.currentPage === (Math.ceil(filter.totalItems / filterItems.perPage))) ? filterItems.currentPage : filterItems.currentPage + 1}&perPage=${filterItems.perPage}&origins=${filterItems.origin}&minPrice=${filterItems.minPrice}&maxPrice=${filterItems.maxPrice}&editable=${isEditable}`
             }
         ))
     }

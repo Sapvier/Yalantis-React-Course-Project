@@ -6,7 +6,6 @@ import EditItemModal from "./EditItemModal";
 
 function MyItemCard({item}) {
     const [isOpen, setIsOpen] = useState(false)
-
     return (
         <div className="itemCard">
             <div className="itemCardContent">

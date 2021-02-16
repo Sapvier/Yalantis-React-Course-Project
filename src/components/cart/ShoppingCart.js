@@ -40,23 +40,30 @@ function ShoppingCart({cartItems, total}) {
                 }})
         }))
     }
-    console.log(total)
 
     return (
         <div className="shoppingCart">
-            <NavLink to="/" className="backHome">Home</NavLink>
-            <div className="shoppingCartTotal">Cart Subtotal: {total}</div>
-            <div className="shoppingCartItems">
-                {cartItems
-                    .map(item => <CartItem
-                        key={item.id}
-                        item={item}
-                        handleSubstractClick={handleSubstractClick}
-                        handleAddClick={handleAddClick}
-                        changeHandler={changeHandler}
-                        removeClick={removeClick}
-                        className="shoppingCartName"/>)}
-                {cartItems.length > 0 && <button className="checkOutButton" onClick={clickHandler}>Buy</button>}
+            <div className="navbarHeader">
+                <NavLink to="/" className="backHome">Home</NavLink>
+            </div>
+            <div className="cartItemsBlock">
+                {cartItems.length > 0 && <div className="shoppingCartTotalBlock">
+                    <p className="shoppingCartTotal">Cart Subtotal: {total}</p>
+                </div>}
+                {cartItems.length === 0 && <p>Your cart is empty</p>}
+                <div className="shoppingCartItems">
+                    {cartItems.map(item => <CartItem
+                            key={item.id}
+                            item={item}
+                            handleSubstractClick={handleSubstractClick}
+                            handleAddClick={handleAddClick}
+                            changeHandler={changeHandler}
+                            removeClick={removeClick}
+                            className="shoppingCartName"/>)}
+                </div>
+                <div className="checkoutBlock">
+                    {cartItems.length > 0 && <button className="checkOutButton" onClick={clickHandler}>Checkout</button>}
+                </div>
             </div>
         </div>
     );

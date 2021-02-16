@@ -41,9 +41,6 @@ function SideBar({origins, isEditable, filterItems, originsArray}) {
 
         return [dispatch(originChange({
             origin,
-            path: `/products`,
-            method: 'GET',
-            data: null,
             filterItems,
             isEditable
         })),

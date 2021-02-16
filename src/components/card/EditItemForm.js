@@ -3,9 +3,9 @@ import "../card/ItemCard.css";
 import {useDispatch, useSelector} from "react-redux";
 import uuid from "react-uuid";
 import {useFormik} from 'formik';
+import {patchProcessing} from "../../store/form/actions";
 import {useInjectSaga} from "../../store/injectSaga";
 import productsFormSaga from "../../store/form/saga";
-import {patchProcessing} from "../../store/form/actions";
 
 
 function EditItemForm({item, onClose}) {
@@ -19,19 +19,10 @@ function EditItemForm({item, onClose}) {
             origin: item.origin
         },
         onSubmit: (values) => {
-            dispatch(
-                patchProcessing({
-                        path: `/products/${item.id}`,
-                        method: 'PATCH',
-                        filter: '',
+            dispatch(patchProcessing({
                         data: JSON.stringify({product: {...values}}),
-                        item: {...item,
-                            name: formik.values.name,
-                            price: formik.values.price,
-                            origin: formik.values.origin
-                        }
-                    }
-                ))
+                        id: item.id
+            }))
             onClose()
         },
         validate: values => {
@@ -90,7 +81,8 @@ function EditItemForm({item, onClose}) {
                     {formik.touched.price && formik.errors.price ?
                         <div className="error">{formik.errors.price}</div> : null}
                 </div>
-                <div className="selector"> Origin:
+                <div className="selector">
+                    <p>Origin: </p>
                     <select name="origin"
                             onChange={formik.handleChange}
                             value={formik.values.origin}>

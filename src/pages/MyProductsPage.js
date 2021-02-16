@@ -10,6 +10,7 @@ import withHeaderAndFooter from "../HOC/withHeaderAndFooter";
 import {fetchLoading} from "../store/products/actions";
 
 
+
 function MyProductsPage({filterItems, products}) {
     useInjectSaga('productsSaga', productsSaga)
     const dispatch = useDispatch()

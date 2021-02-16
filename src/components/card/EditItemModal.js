@@ -1,6 +1,8 @@
 import React from 'react';
 import "../header/NavBar.css";
 import ReactDom from 'react-dom'
+import {useInjectSaga} from "../../store/injectSaga";
+import productsFormSaga from "../../store/form/saga";
 
 
 function EditItemModal({open, children, onClose}) {

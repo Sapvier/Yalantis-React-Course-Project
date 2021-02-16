@@ -5,7 +5,7 @@ function CartItem({item, handleSubstractClick, handleAddClick, changeHandler, re
     const [count, setCount] = useState(item.quantity)
 
     return (
-        <div className="shoppingCartContent">{item.name}
+        <div className="shoppingCartContent">{item.name},&nbsp;{item.price*count}
             <span onClick={() => {
                 handleSubstractClick(item)
                 if (item.quantity >= 2)

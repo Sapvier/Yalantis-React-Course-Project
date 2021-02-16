@@ -1,4 +1,4 @@
-import {takeEvery, call, put, select, debounce, delay} from 'redux-saga/effects'
+import {takeEvery, call, put, select, debounce, delay, takeLatest} from 'redux-saga/effects'
 import {
     addOrigins,
     checkOrigin,
@@ -87,5 +87,5 @@ export default function* originsSaga() {
     yield takeEvery(ORIGINS_FETCH_ORIGINS, onGetOrigins)
     yield takeEvery(ORIGINS_FETCH_FILTER, onGetFilter)
     yield debounce(2000, [ORIGINS_MINPRICE_CHANGE, ORIGINS_MAXPRICE_CHANGE], onGetPrice)
-    yield takeEvery(ORIGINS_ORIGIN_CHANGE, onCheckOrigin)
+    yield takeLatest(ORIGINS_ORIGIN_CHANGE, onCheckOrigin)
 }

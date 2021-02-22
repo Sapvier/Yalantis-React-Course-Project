@@ -1,39 +1,50 @@
 import React, {useEffect} from 'react';
 import "../components/items/ItemsList.css";
-import {useDispatch, useSelector} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import ItemsList from "../components/items/ItemsList";
-import {fetchItems} from "../utils/services/api/fetch";
-import {fetchError, fetchLoading, fetchSuccess, saveProducts} from "../store/products/actions";
 import SideBar from "../components/sidebar/SideBar";
-import {savePages} from "../store/pagination/actions";
-import withFooter from "../HOC/withFooter";
-import withHeader from "../HOC/withHeader";
+import {useInjectSaga} from "../store/injectSaga";
+import productsSaga from "../store/products/saga";
+import {filter, getProducts} from "../store/products/selector";
+import withHeaderAndFooter from "../HOC/withHeaderAndFooter";
+import {useLocation} from "react-router-dom";
+import {fetchLoading} from "../store/products/actions";
+const queryString = require('query-string');
 
 
-function ItemsPage() {
+function ItemsPage({filterItems, products}) {
+    useInjectSaga('productsSaga', productsSaga)
     const dispatch = useDispatch()
-    const products = useSelector(state => state.productsReducer.products)
-    const pagination = useSelector(state => state.pagesReducer)
-    const filter = useSelector(state => state.filterReducer)
+    const isEditable = false
+    const location = useLocation()
+    const search = queryString.parse(location.search);
 
-    useEffect( () => {
-        dispatch(fetchLoading())
-        fetchItems(pagination.currentPage, pagination.perPage, filter)
-            .then(r => {
-                dispatch(fetchSuccess())
-                let result = []
-                r.items.map(item => result.push({...item, quantity: 0}))
-                dispatch(saveProducts(result))
-                dispatch(savePages(Math.ceil(r.totalItems / r.perPage)))
-            }).catch(err => dispatch(fetchError()))
+
+    useEffect(() => {
+        dispatch(
+            fetchLoading({
+                path: `/products`,
+                method: 'GET',
+                data: null,
+                filter: `?page=${filterItems.currentPage}&perPage=${filterItems.perPage}&origins=${location.search.length > 0 ? search.origin : ''}&minPrice=${location.search.length > 0 ? search.minPrice : filterItems.minPrice}&maxPrice=${location.search.length > 0 ? search.maxPrice : filterItems.maxPrice}&editable=${filterItems.isEditable}`
+            })
+        )
     }, [])
+
 
     return (
         <div>
-            <SideBar/>
+            <SideBar isEditable={isEditable}/>
             <ItemsList products={products}/>
         </div>
     );
 }
 
-export default withHeader(withFooter(ItemsPage));
+
+const mapStateToProps = (state) => {
+    return {
+        filterItems: filter(state),
+        products: getProducts(state)
+    }
+}
+export default connect(mapStateToProps, null)(withHeaderAndFooter(ItemsPage))

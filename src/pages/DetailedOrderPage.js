@@ -1,26 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation} from "react-router-dom";
-import { fetchItem } from "../utils/services/api/fetch";
+import React, {useEffect} from 'react';
+import {useLocation} from "react-router-dom";
 import "../components/card/ItemCard.css";
 import DetailedOrderCard from "../components/orders/DetailedOrderCard";
-import withHeader from "../HOC/withHeader";
+import withHeaderAndFooter from "../HOC/withHeaderAndFooter";
+import {useInjectSaga} from "../store/injectSaga";
+import detailedOrderSaga from "../store/detailedOrder/saga";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchOrderLoading} from "../store/detailedOrder/actions";
 
 
 function DetailedOrderPage() {
-    const[item, setItem] = useState({})
+    useInjectSaga('detailedOrderSaga', detailedOrderSaga)
     let location = useLocation();
+    const dispatch = useDispatch()
+    const order = useSelector(state => state.detailedOrderReducer.order)
 
-    useEffect( () => {
-        fetchItem(location.pathname)
-            .then(r => setItem(r))
+    useEffect(() => {
+        dispatch(fetchOrderLoading({
+            path: `${location.pathname}`,
+            method: 'GET',
+            data: null,
+            filter: ''
+        }))
     }, [])
 
     return (
-        <div>
-            <DetailedOrderCard item={item}/>
+        <div className="detailed-order-card-page">
+            <DetailedOrderCard order={order}/>
         </div>
 
     );
 }
 
-export default withHeader(DetailedOrderPage);
+export default withHeaderAndFooter(DetailedOrderPage);

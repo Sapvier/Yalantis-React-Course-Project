@@ -1,40 +1,33 @@
 import React, {useState} from 'react';
 import "./ShoppingCart.css"
-import {useDispatch} from "react-redux";
-import {addQuantity, removeDuplicate, removeQuantity, setQuantity} from "../../store/cart/actions";
 
-function CartItem({item}) {
-    const dispatch = useDispatch()
+function CartItem({item, handleSubstractClick, handleAddClick, changeHandler, removeClick}) {
     const [count, setCount] = useState(item.quantity)
 
-    const changeHandler = (e) => {
-        dispatch(removeDuplicate(item))
-        dispatch(setQuantity({...item, quantity: e.target.value}))
-        setCount(e.target.value)
-    }
-
     return (
-            <div className="shoppingCartContent">{item.name}
+        <div className="shopping-cart-items-content">
+            <p className="shopping-cart-items-content name">{item.name}</p>
+            <p>{item.price * count}</p>
+            <div>
                 <span onClick={() => {
-                    if (item.quantity < 2) {
-                        dispatch(removeDuplicate(item))
-                    }
-                    else {
-                        dispatch(removeDuplicate(item))
-                        dispatch(removeQuantity(item))
+                    handleSubstractClick(item)
+                    if (item.quantity >= 2)
                         setCount(count - 1)
-                    }
                 }}>&#8722;</span>
-                <input type="number" className="shoppingCartItemQuantity" value={count} onInput={changeHandler}/>
+                <input value={count} onInput={(e) => {
+                    setCount(e.target.value)
+                    changeHandler({...item, quantity: parseInt(e.target.value)})
+                }
+                }/>
                 <span onClick={() => {
-                    dispatch(removeDuplicate(item))
-                    dispatch(addQuantity(item))
+                    handleAddClick(item)
                     setCount(count + 1)
                 }}>&#43;</span>
-                <span onClick={()=> {
-                    dispatch(removeDuplicate(item))
-                }}>&#10005;</span>
             </div>
+            <span onClick={() => removeClick(item)
+            }>&#10005;</span>
+        </div>
     )
 }
+
 export default CartItem

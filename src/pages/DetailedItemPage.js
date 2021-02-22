@@ -1,26 +1,38 @@
-import React, {useEffect, useState} from 'react';
-import { useLocation } from "react-router-dom";
-import {fetchItem} from "../utils/services/api/fetch";
+import React, {useEffect} from 'react';
+import {useLocation} from "react-router-dom";
 import "../components/card/ItemCard.css";
 import DetailedItemCard from "../components/card/DetailedItemCard";
-import withHeader from "../HOC/withHeader";
+import withHeaderAndFooter from "../HOC/withHeaderAndFooter";
+import {useInjectSaga} from "../store/injectSaga";
+import detailedItemSaga from "../store/detailedCard/saga";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchItemLoading} from "../store/detailedCard/actions";
 
 
 function DetailedItemPage() {
-    const[item, setItem] = useState({})
+    useInjectSaga('detailedItemSaga', detailedItemSaga)
+    const dispatch = useDispatch()
+    const item = useSelector(state => state.detailedItemReducer.item)
     let location = useLocation();
 
-    useEffect( () => {
-        fetchItem(location.pathname)
-            .then(r => setItem(r))
+    useEffect(() => {
+        dispatch(
+            fetchItemLoading({
+                path: `${location.pathname}`,
+                method: 'GET',
+                data: null,
+                filter: ''
+            })
+        )
     }, [])
 
+
     return (
-        <div>
+        <div className="detailed-item-card-page">
             <DetailedItemCard item={item}/>
         </div>
 
     );
 }
 
-export default withHeader(DetailedItemPage);
+export default withHeaderAndFooter(DetailedItemPage);

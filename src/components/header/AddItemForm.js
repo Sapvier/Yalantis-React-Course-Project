@@ -3,11 +3,13 @@ import "../header/NavBar.css";
 import {useDispatch, useSelector} from "react-redux";
 import uuid from "react-uuid";
 import {useFormik} from 'formik'
-import {postItem} from "../../utils/services/api/post";
-import {postError, postProcessing, postSuccess} from "../../store/form/actions";
+import {useInjectSaga} from "../../store/injectSaga";
+import productsFormSaga from "../../store/form/saga";
+import {postProcessing} from "../../store/form/actions";
 
 
 function AddItemForm({onClose}) {
+    useInjectSaga('productsFormSaga', productsFormSaga)
     const origins = useSelector(state => state.filterReducer.origin)
     const dispatch = useDispatch()
     const formik = useFormik({
@@ -17,8 +19,7 @@ function AddItemForm({onClose}) {
             origin: 'africa',
         },
         onSubmit: values => {
-            dispatch(postProcessing())
-            postItem({product: {...values}}).then(r => dispatch(postSuccess())).catch(e => dispatch(postError()))
+            dispatch(postProcessing({path: `/products`, method: 'POST', filter: '', data: JSON.stringify({product: {...values}})}))
             onClose()
         },
         validate: values => {
@@ -44,14 +45,14 @@ function AddItemForm({onClose}) {
 
     return (
         <>
-            <span className="closeModal" onClick={onClose}>&#10005;</span>
+            <span className="close-modal" onClick={onClose}>&#10005;</span>
             <form className="form" onSubmit={formik.handleSubmit}>
-                <div className="formControl">
+                <div className="form-control">
                     <label htmlFor="name"/>Name
                     <input name="name"
                            type="text"
                            id="name"
-                           className="formInput"
+                           className="form-input"
                            onChange={formik.handleChange}
                            value={formik.values.name}
                            onBlur={formik.handleBlur}
@@ -59,26 +60,27 @@ function AddItemForm({onClose}) {
                     {formik.touched.name && formik.errors.name ?
                         <div className="error">{formik.errors.name}</div> : null}
                 </div>
-                <div className="formControl">
+                <div className="form-control">
                     <label htmlFor="price"/>Price
                     <input name="price"
                            type="number"
                            id="price"
-                           className="formInput"
+                           className="form-input"
                            onChange={formik.handleChange}
                            value={formik.values.price}
                            onBlur={formik.handleBlur}/>
                     {formik.touched.price && formik.errors.price ?
                         <div className="error">{formik.errors.price}</div> : null}
                 </div>
-                <div className="selector"> Origin:
+                <div className="selector">
+                    <p>Origin: </p>
                     <select name="origin"
                             onChange={formik.handleChange}
                             value={formik.values.origin}>
                         {origins.map(origin => <option value={origin.value} key={uuid()}>{origin.displayName}</option>)}
                     </select>
                 </div>
-                <button className="submitButton" type="submit">Submit</button>
+                <button type="submit">Submit</button>
             </form>
         </>
     )

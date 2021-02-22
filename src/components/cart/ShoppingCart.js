@@ -1,27 +1,70 @@
-import React from 'react';
-import {totalSum} from "../../utils/services/cartCounter/total";
+import React, {useCallback} from 'react';
 import "./ShoppingCart.css"
 import CartItem from "./CartItem";
-import {connect, useDispatch} from "react-redux";
-import {postOrder} from "../../utils/services/api/post";
-import {clearCart} from "../../store/cart/actions";
-import {getCartItems} from "../../store/cart/selector";
+import {connect, useDispatch, useSelector} from "react-redux";
+import {getCartItems, totalSum} from "../../store/cart/selector";
 import {NavLink} from "react-router-dom";
+import {
+    addToCart,
+    removeFromCart, removeQuantity,
+    saveOrder,
+    setQuantity
+} from "../../store/cart/actions";
 
 
-function ShoppingCart({addedItems, cartItems}) {
+function ShoppingCart({cartItems, total}) {
     const dispatch = useDispatch()
+    const handleSubstractClick = useCallback((item) => {
+        if (item.quantity < 2) {
+            return dispatch(removeFromCart(item))
+        } else {
+            return dispatch(removeQuantity(item))
+        }
+    }, []);
+
+    const handleAddClick = useCallback((item) => {dispatch(addToCart(item))}, []);
+    const removeClick = useCallback((item) => {dispatch(removeFromCart(item))}, []);
+    const changeHandler = useCallback((item) => {dispatch(setQuantity(item))}, []);
+
     const clickHandler = () => {
-        postOrder(cartItems).then(r => dispatch(clearCart()))
+        let cart = []
+        cartItems.map(item =>
+            cart.push({
+                productId: item.id,
+                count: item.quantity
+            }))
+        dispatch(saveOrder({
+                path: `/orders`, method: 'POST', filter: '', cart, data: JSON.stringify({
+                    order: {
+                        pieces: [...cart]
+                }})
+        }))
     }
 
     return (
-        <div className="shoppingCart">
-            <NavLink to="/" className="backHome">Home</NavLink>
-            <div className="shoppingCartTotal">Cart Subtotal: {totalSum(addedItems)}</div>
-            <div className="shoppingCartItems">
-                {addedItems.map(item => <CartItem key={item.id} item={item} className="shoppingCartName" />)}
-                {cartItems.length > 0 && <button className="checkOutButton" onClick={clickHandler}>Buy</button>}
+        <div className="cart-page">
+            <div className="navbar">
+                <NavLink to="/">Home</NavLink>
+                <span></span>
+            </div>
+            <div className="shopping-cart">
+                {cartItems.length > 0 && <div className="shopping-cart-total">
+                    <p>Cart Subtotal: {total}</p>
+                </div>}
+                {cartItems.length === 0 && <p>Your cart is empty</p>}
+                <div className="shopping-cart-items">
+                    {cartItems.map(item => <CartItem
+                            key={item.id}
+                            item={item}
+                            handleSubstractClick={handleSubstractClick}
+                            handleAddClick={handleAddClick}
+                            changeHandler={changeHandler}
+                            removeClick={removeClick}
+                            className="shopping-cart-name"/>)}
+                </div>
+                {cartItems.length > 0 && <div className="checkout">
+                    <button onClick={clickHandler}>Checkout</button>
+                </div>}
             </div>
         </div>
     );
@@ -29,7 +72,8 @@ function ShoppingCart({addedItems, cartItems}) {
 
 const mapStateToProps = (state) => {
     return {
-        cartItems: getCartItems(state)
+        cartItems: getCartItems(state),
+        total: totalSum(state)
     }
 }
 export default connect(mapStateToProps, null)(ShoppingCart)

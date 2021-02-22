@@ -3,12 +3,13 @@ import "../card/ItemCard.css";
 import {useDispatch, useSelector} from "react-redux";
 import uuid from "react-uuid";
 import {useFormik} from 'formik';
-import {patchItem} from "../../utils/services/api/patch";
-import {patchError, patchProcessing, patchSuccess} from "../../store/form/actions";
-import {updateItem} from "../../store/products/actions";
+import {patchProcessing} from "../../store/form/actions";
+import {useInjectSaga} from "../../store/injectSaga";
+import productsFormSaga from "../../store/form/saga";
 
 
 function EditItemForm({item, onClose}) {
+    useInjectSaga('productsFormSaga', productsFormSaga)
     const origins = useSelector(state => state.filterReducer.origin)
     const dispatch = useDispatch()
     const formik = useFormik({
@@ -18,8 +19,10 @@ function EditItemForm({item, onClose}) {
             origin: item.origin
         },
         onSubmit: (values) => {
-            dispatch(patchProcessing())
-            patchItem({product: {...values}}, item.id).then(r => dispatch(patchSuccess()), dispatch(updateItem({product: {...values}}, item.id))).catch(e => dispatch(patchError()))
+            dispatch(patchProcessing({
+                        data: JSON.stringify({product: {...values}}),
+                        id: item.id
+            }))
             onClose()
         },
         validate: values => {
@@ -53,41 +56,42 @@ function EditItemForm({item, onClose}) {
 
     return (
         <>
-            <span className="closeModal" onClick={onClose}>&#10005;</span>
+            <span className="close-modal" onClick={onClose}>&#10005;</span>
             <form className="form" onSubmit={formik.handleSubmit}>
-                <div className="formControl">
+                <div className="form-control">
                     <label htmlFor="name"/>Name
                     <input name="name"
                            type="text"
                            id="name"
-                           className="formInput"
+                           className="form-input"
                            onChange={formik.handleChange}
                            value={formik.values.name}
                            autoFocus/>
                     {formik.touched.name && formik.errors.name ?
                         <div className="error">{formik.errors.name}</div> : null}
                 </div>
-                <div className="formControl">
+                <div className="form-control">
                     <label htmlFor="price"/>Price
                     <input name="price"
                            type="number"
                            id="price"
-                           className="formInput"
+                           className="form-input"
                            onChange={formik.handleChange}
                            value={formik.values.price}/>
                     {formik.touched.price && formik.errors.price ?
                         <div className="error">{formik.errors.price}</div> : null}
                 </div>
-                <div className="selector"> Origin:
+                <div className="selector">
+                    <p>Origin: </p>
                     <select name="origin"
                             onChange={formik.handleChange}
                             value={formik.values.origin}>
                         {origins.map(origin => <option value={origin.value} key={uuid()}>{origin.displayName}</option>)}
                     </select>
                 </div>
-                <div>
-                    <button className="formButton" type="submit">Save</button>
-                    <button className="formButton" type="reset" onClick={handlerReset}>Clear fields</button>
+                <div className="buttons">
+                    <button type="submit">Save</button>
+                    <button type="reset" onClick={handlerReset}>Clear fields</button>
                 </div>
             </form>
         </>

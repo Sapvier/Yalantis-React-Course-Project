@@ -1,26 +1,63 @@
-.perPage {
-   padding-top: 10px;
-    border-top: 1px solid black;
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 40px;
+    border-top: 1px solid lightgrey;
     margin-left: 160px;
 }
-.pages {
+.pagination-block {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
+    min-width: 80%;
+    height: 30px;
+    margin-left: 5%;
+    margin-top: 20px;
 }
-.page {
-    margin-right: 5px;
-    cursor: pointer;
+.arrow-icon {
+    min-height: 20px;
+    min-width: 20px;
+    background-color:  #796eb9;
+    color: antiquewhite;
+    border-radius: 2px;
+    text-align: center;
 }
-.page:hover {
-    color: dimgray;
-}
-.selector {
+.limit-selector {
     float: right;
+    min-height: 25px;
+    width: 5%;
+    margin-top: 20px;
 }
-.pageFocused {
-    margin-right: 5px;
-    color: darkorchid;
-    font-weight: bolder;
-    border-bottom: 1px solid darkorchid
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul.pagination li {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+}
+ul.pagination li a {
+    text-decoration: none;
+    color: #7e75b2;
+    font-size: 15px;
+    padding: 8px;
+}
+
+ul.pagination li.active a {
+    color: slateblue;
+}
+ul.pagination li.active {
+    background-color: lavenderblush;
+    border-radius: 3px;
+}
+
+ul.pagination li a:hover,
+ul.pagination li a.active {
+    color: slateblue;
 }

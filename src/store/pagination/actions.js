@@ -1,20 +1,16 @@
-import {SAVE_PAGES, SET_PAGE, SET_PAGELIMIT} from "./types";
+import {
+    PAGINATION_PAGELIMIT_CHANGE,
+    PAGINATION_SAVE_PAGES,
+    PAGINATION_SET_PAGE,
+    PAGINATION_SET_PAGELIMIT
+} from "./types";
 
-export function savePages(pages) {
-    return {
-        type: SAVE_PAGES,
-        payload: pages
-    }
-}
-export function setCurrentPage(page) {
-    return {
-        type: SET_PAGE,
-        payload: page
-    }
-}
-export function setCurrentLimit(pageLimit) {
-    return {
-        type: SET_PAGELIMIT,
-        payload: pageLimit
-    }
-}
+export const saveItemsCount = (payload) => ({type: PAGINATION_SAVE_PAGES, payload})
+
+export const setCurrentPage = (payload) => ({type: PAGINATION_SET_PAGE, payload})
+
+export const setCurrentLimit = (payload) => ({type: PAGINATION_SET_PAGELIMIT, payload})
+
+export const pagelimitChange = (payload) => ({type: PAGINATION_PAGELIMIT_CHANGE, payload})
+
+

@@ -5,7 +5,7 @@ import "./ItemsList.css";
 
 function MyItemsList({products}) {
     return (
-        <div className="itemsContainer">
+        <div className="items-container">
             {products.map(product => <MyItemCard item={product} key={product.id}/>)}
         </div>
     );

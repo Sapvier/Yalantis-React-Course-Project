@@ -7,7 +7,7 @@ function AddItemModal({open, children, onClose}) {
     if (!open) return null
     return ReactDom.createPortal(
         <>
-            <div className="modalOverlay" onClick={onClose}/>
+            <div className="modal-overlay" onClick={onClose}/>
             <div className="modal">
                 {children}
             </div>

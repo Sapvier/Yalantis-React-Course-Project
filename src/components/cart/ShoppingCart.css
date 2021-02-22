@@ -3,54 +3,80 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-.shoppingCart {
+.cart-page {
     margin-top: -45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.shoppingCartTotal {
-    margin-bottom: 10px;
-    border-bottom: 1px solid black;
-    font-weight: bold;
-}
-.shoppingCartContent {
-    display: inline-block;
-    margin-left: 10px;
-}
-.shoppingCartName{
-    font-size: 120%;
-}
-.shoppingCartItems {
+.shopping-cart {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-}
-input {
-    width: 25px;
-    text-align: center;
-}
-span {
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 55vh;
+    width: 35vw;
+    background-color: lavenderblush;
+    border: 1px solid lavenderblush;
     cursor: pointer;
-    margin: 0.5rem;
-}
-.checkOutButton {
-    margin-top: 30px;
-    margin-left: 30px;
-    width: 100px;
-    height: 35px;
-    font-size: 1rem;
     border-radius: 5px;
-    background-color: slateblue;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.shopping-cart-total {
+    border-bottom: 1px solid lightgray;
+    font-size: 1rem;
+    min-width: 95%;
+    min-height: 15%;
+}
+.shopping-cart-name{
+    font-size: 120%;
+}
+.shopping-cart-items {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+    min-height: 65%;
+    min-width: 95%;
+    margin-top: 5px;
+}
+.shopping-cart-items-content {
+    display: grid;
+    grid-template-columns: 55% 10% 25% 10% ;
+    min-width: 95%;
+
+}
+.shopping-cart-items-content > span, p, div {
+    justify-self: center;
+    align-self: center;
+}
+.shopping-cart-items-content input {
+    border: darkslateblue 1px solid;
+    border-radius: 3px;
+    background: lavenderblush;
+}
+.shopping-cart-items-content input:focus {
+    background: slateblue;
     outline: none;
     color: antiquewhite;
-    border: 1px solid slateblue;
-    align-self: flex-start;
 }
-.checkOutButton:hover{
-    background-color: darkslateblue;
-    cursor: pointer;
-}
-.backHome {
-    text-decoration: none;
-    color: black;
+.shopping-cart-items-content.name {
     font-weight: bold;
-    float: right;
+    min-width: 100%;
 }
+.checkout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid lightgray;
+    min-height: 20%;
+    min-width: 100%;
+}
+
+

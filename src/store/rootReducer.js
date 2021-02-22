@@ -5,6 +5,8 @@ import {filterReducer} from "./origins/reducer";
 import {pagesReducer} from "./pagination/reducer";
 import {formReducer} from "./form/reducer";
 import {ordersReducer} from "./orders/reducer";
+import {detailedItemReducer} from "./detailedCard/reducer";
+import {detailedOrderReducer} from "./detailedOrder/reducer";
 
 export const rootReducer = combineReducers({
     productsReducer,
@@ -12,5 +14,7 @@ export const rootReducer = combineReducers({
     filterReducer,
     pagesReducer,
     formReducer,
-    ordersReducer
+    ordersReducer,
+    detailedItemReducer,
+    detailedOrderReducer
 })

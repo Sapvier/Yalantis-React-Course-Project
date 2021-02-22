@@ -1,23 +1,16 @@
-import {SAVE_ORDERS, UPDATE_ERROR, UPDATE_LOADING, UPDATE_SUCCESS} from "./types";
+import {
+    ORDERS_FETCH_ERROR,
+    ORDERS_FETCH_ORDERS,
+    ORDERS_FETCH_SUCCESS,
+    ORDERS_SAVE_ORDERS
+} from "./types";
 
-export function saveOrders(products) {
-    return {
-        type: SAVE_ORDERS,
-        payload: products.items
-    }
-}
-export const fetchSuccess = () => {
-    return {
-        type: UPDATE_SUCCESS
-    }
-}
-export const fetchError = () => {
-    return {
-        type: UPDATE_ERROR
-    }
-}
-export const fetchLoading = () => {
-    return {
-        type: UPDATE_LOADING
-    }
-}
+export const saveOrders = (products) => ({type: ORDERS_SAVE_ORDERS, payload: products.items})
+
+export const fetchOrdersLoading = (payload) => ({type: ORDERS_FETCH_ORDERS, payload})
+
+export const fetchOrdersSuccess = () => ({type: ORDERS_FETCH_SUCCESS})
+
+export const fetchOrdersError = () => ({type: ORDERS_FETCH_ERROR})
+
+

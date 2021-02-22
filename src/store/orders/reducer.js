@@ -1,25 +1,33 @@
-import {SAVE_ORDERS, UPDATE_ERROR, UPDATE_LOADING, UPDATE_SUCCESS} from "./types";
+import {
+    ORDERS_FETCH_ORDERS,
+    ORDERS_FETCH_ERROR,
+    ORDERS_FETCH_SUCCESS,
+    ORDERS_SAVE_ORDERS
+} from "./types";
+
 
 const initialState = {
     items: [],
-    fetch: "pending"
+    fetch: "pending",
+    post: "pending",
+    order: "pending"
 }
 
 export const ordersReducer = (state = initialState, action) => {
     switch (action.type) {
         default:
             return state
-        case SAVE_ORDERS: {
+        case ORDERS_SAVE_ORDERS: {
             return {...state, items: action.payload}
         }
-        case UPDATE_SUCCESS: {
+        case ORDERS_FETCH_SUCCESS: {
             return {...state, fetch: "success"}
         }
-        case UPDATE_ERROR: {
+        case ORDERS_FETCH_ERROR: {
             return {...state, fetch: "error"}
         }
-        case UPDATE_LOADING: {
-            return {...state, fetch: "loading"}
+        case ORDERS_FETCH_ORDERS: {
+            return {...state, fetch: "fetching"}
         }
     }
 }

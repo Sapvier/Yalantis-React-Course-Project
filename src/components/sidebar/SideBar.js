@@ -1,55 +1,115 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import "./SideBar.css";
-import {fetchItems, fetchOrigins} from "../../utils/services/api/fetch";
 import uuid from 'react-uuid'
 import Origin from "./Origin";
-import {connect, useDispatch, useSelector} from "react-redux";
-import {addOrigins, setMaxPrice, setMinPrice} from "../../store/origins/actions";
-import {fetchError, fetchLoading, fetchSuccess, saveProducts} from "../../store/products/actions";
-import {savePages} from "../../store/pagination/actions";
-import {getSortedOrigins} from "../../store/origins/selector";
+import {connect, useDispatch} from "react-redux";
+import {getFilterItems, getOriginsArray, getSortedOrigins} from "../../store/origins/selector";
+import originsSaga from "../../store/origins/saga";
+import {useInjectSaga} from "../../store/injectSaga";
+import {filter} from "../../store/products/selector";
+import {fetchingOrigins, maxPriceChange, minPriceChange, originChange} from "../../store/origins/actions";
+import {useLocation, useHistory} from "react-router-dom";
 
 
-function SideBar ({origins, isEditable}) {
+function SideBar({origins, isEditable, filterItems, originsArray}) {
+    useInjectSaga('originsSaga', originsSaga)
     const dispatch = useDispatch()
-    const minPrice = useSelector(state => state.filterReducer.price.minPrice)
-    const filter = useSelector(state => state.filterReducer)
-    const pagination = useSelector(state => state.pagesReducer)
+    const location = useLocation()
+    const history = useHistory()
+    const queryString = require('query-string');
+    const search = queryString.parse(location.search);
 
-    useEffect( () => {
+
+    useEffect(() => {
         if (origins.length === 0)
-            fetchOrigins().then(r => {r.items.map(item => dispatch(addOrigins({...item, isChecked: false})))
-        })
+            dispatch(fetchingOrigins({
+                path: `/products-origins`, method: 'GET', filter: '', origin: search.origin, price: {
+                    minPrice: location.search.length > 0 ? search.minPrice : filterItems.minPrice,
+                    maxPrice: location.search.length > 0 ? search.maxPrice : filterItems.maxPrice
+                }
+            }))
     }, [])
 
 
-    const clickHandler = () => {
-        dispatch(fetchLoading())
-        fetchItems(pagination.currentPage, pagination.perPage, filter, isEditable).then(r => {
-            dispatch(fetchSuccess())
-            dispatch(saveProducts(r.items))
-            dispatch(savePages(Math.ceil(r.totalItems / r.perPage)))
-        }).catch(err => dispatch(fetchError()))
-    }
+    const changeHandler = useCallback((origin, originsArray) => {
+        let originsArr = [...originsArray]
+        if (originsArray.includes(origin.value)) {
+            originsArr = originsArr.filter(item => {
+                return item !== origin.value
+            })
+        } else originsArr.push(origin.value)
+
+        return [dispatch(originChange({
+            origin,
+            filterItems,
+            isEditable
+        })),
+            history.replace({
+                pathname: `${location.pathname}`,
+                search: `minPrice=${filterItems.minPrice}&maxPrice=${filterItems.maxPrice}&origin=${originsArr.join()}`
+            })]
+    }, []);
+
 
     const minHandleChange = (e) => {
-        dispatch(setMinPrice(e.target.value))
+        dispatch(minPriceChange({
+            filterItems,
+            isEditable,
+            price: {
+                maxPrice: filterItems.maxPrice,
+                minPrice: e.target.value,
+            }
+        }))
+        history.replace({
+            pathname: `${location.pathname}`,
+            search: `minPrice=${e.target.value}&maxPrice=${filterItems.maxPrice}&origin=${originsArray.join()}`
+        })
     }
+
     const maxHandleChange = (e) => {
-        dispatch(setMaxPrice(e.target.value))
+        dispatch(maxPriceChange({
+            filterItems,
+            isEditable,
+            price: {
+                maxPrice: e.target.value,
+                minPrice: filterItems.minPrice
+            }
+        }))
+        history.replace({
+            pathname: `${location.pathname}`,
+            search: `minPrice=${filterItems.minPrice}&maxPrice=${e.target.value}&origin=${originsArray.join()}`
+        })
     }
 
     return (
         <aside className="side">
-            <p>Origin:</p>
-            {origins.map(origin => <Origin className="origin" origin={origin} key={uuid()}/>)}
-            <div>Price
-                <div>
-                    <input type="number" className="sideBarPrice" name="minPrice" defaultValue={minPrice} onInput={minHandleChange}/>&#8212;
-                    <input type="number" className="sideBarPrice" name="maxPrice" onInput={maxHandleChange}/>
+            <form>
+                <p>Origin</p>
+                {origins.map(origin =>
+                    <Origin
+                        className="origin"
+                        origin={origin}
+                        key={uuid()}
+                        isEditable={isEditable}
+                        changeHandler={changeHandler}
+                        originsArray={originsArray}
+                    />)}
+
+                <div className="price-block">Price
+                    <div className="price-range">
+                        <input type="number"
+                               className="sidebar-price"
+                               name="minPrice"
+                               defaultValue={filterItems.minPrice}
+                               onInput={minHandleChange}/>&#8212;
+                        <input type="number"
+                               className="sidebar-price"
+                               name="maxPrice"
+                               onInput={maxHandleChange}
+                               defaultValue={filterItems.maxPrice}/>
+                    </div>
                 </div>
-            </div>
-            <button className="filterButton" onClick={clickHandler}>Filter</button>
+            </form>
         </aside>
     );
 }
@@ -57,7 +117,10 @@ function SideBar ({origins, isEditable}) {
 
 const mapStateToProps = (state) => {
     return {
-        origins: getSortedOrigins(state)
+        origins: getSortedOrigins(state),
+        filterItems: filter(state),
+        filter: getFilterItems(state),
+        originsArray: getOriginsArray(state)
     }
 }
 export default connect(mapStateToProps, null)(SideBar)

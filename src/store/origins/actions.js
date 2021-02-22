@@ -1,38 +1,39 @@
-import {ADD_ORIGIN, CHECK_ORIGIN, REMOVE_ORIGIN, SET_MAXPRICE, SET_MINPRICE, UNCHECK_ORIGIN} from "./types";
+import {
+    ORIGINS_ADD_ORIGIN,
+    ORIGINS_CHECK_ORIGIN,
+    ORIGINS_FETCH_FAIL,
+    ORIGINS_FETCH_ORIGINS,
+    ORIGINS_FETCH_SUCCESS,
+    ORIGINS_MAXPRICE_CHANGE,
+    ORIGINS_MINPRICE_CHANGE,
+    ORIGINS_ORIGIN_CHANGE,
+    ORIGINS_SET_PRICE,
+    ORIGINS_UNCHECK_ORIGIN
+} from "./types";
+
 
 export const addOrigins = (origins) => {
     return {
-        type: ADD_ORIGIN,
-        payload: origins
+        type: ORIGINS_ADD_ORIGIN,
+        payload: origins.map(item => ({...item, isChecked: false}))
     }
 }
-export const removeOrigin = (origin) => {
-    return {
-        type: REMOVE_ORIGIN,
-        payload: origin
-    }
-}
-export const checkOrigin = (origin) => {
-    return {
-        type: CHECK_ORIGIN,
-        payload: {...origin, isChecked: true}
-    }
-}
-export const unCheckOrigin = (origin) => {
-    return {
-        type: UNCHECK_ORIGIN,
-        payload: {...origin, isChecked: false}
-    }
-}
-export const setMinPrice = (price) => {
-    return {
-        type: SET_MINPRICE,
-        payload: price
-    }
-}
-export const setMaxPrice = (price) => {
-    return {
-        type: SET_MAXPRICE,
-        payload: price
-    }
-}
+export const checkOrigin = (payload) => ({type: ORIGINS_CHECK_ORIGIN, payload})
+
+export const setPrice = (payload) => ({type: ORIGINS_SET_PRICE, payload})
+
+export const fetchOriginsSuccess = () => ({type: ORIGINS_FETCH_SUCCESS})
+
+export const fetchOriginsFail = () => ({type: ORIGINS_FETCH_FAIL})
+
+export const fetchingOrigins = (payload) => ({type: ORIGINS_FETCH_ORIGINS, payload})
+
+export const originChange = (payload) => ({type: ORIGINS_ORIGIN_CHANGE, payload})
+
+export const minPriceChange = (payload) => ({type: ORIGINS_MINPRICE_CHANGE, payload})
+
+export const maxPriceChange = (payload) => ({type: ORIGINS_MAXPRICE_CHANGE, payload})
+
+export const fetchFiltered = (payload) => ({type: ORIGINS_UNCHECK_ORIGIN, payload})
+
+

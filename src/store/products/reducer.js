@@ -28,7 +28,6 @@ export const productsReducer = (state = initialState, action) => {
             return {...state, fetch: "loading"}
         }
         case PRODUCTS_UPDATE_ITEM:
-            console.log(action.payload)
             return {
                 ...state, products: state.products.map(item => {
                     if (item.id === action.payload.id) {

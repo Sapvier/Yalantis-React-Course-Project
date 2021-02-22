@@ -4,14 +4,14 @@ import "../card/ItemCard.css";
 
 function ItemCard({item, handleClick, handleAddClick}) {
     return (
-        <div className="itemCard">
-            <div onClick={() => handleClick(item.id)} className="itemCardContent">
+        <div className="item-card">
+            <div onClick={() => handleClick(item.id)} className="item-card-content">
                 <p>{item.name}</p>
                 <p>Price: {item.price}</p>
                 <p>Origin: {item.origin}</p>
             </div>
-            <div className="buttonContainer">
-                <button className="buyButton" onClick={() =>
+            <div className="button-container">
+                <button onClick={() =>
                     handleAddClick(item)
                 }
                 >Buy

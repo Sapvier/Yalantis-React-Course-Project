@@ -11,7 +11,7 @@ function MyOrders({orders}) {
     }, []);
 
     return (
-        <div className="ordersContainer">
+        <div className="orders-container">
             {orders.map(order => <Order
                 order={order} key={order.id}
                 id={orders.indexOf(order) + 1}

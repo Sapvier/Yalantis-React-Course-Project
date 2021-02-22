@@ -56,26 +56,26 @@ function EditItemForm({item, onClose}) {
 
     return (
         <>
-            <span className="closeModal" onClick={onClose}>&#10005;</span>
+            <span className="close-modal" onClick={onClose}>&#10005;</span>
             <form className="form" onSubmit={formik.handleSubmit}>
-                <div className="formControl">
+                <div className="form-control">
                     <label htmlFor="name"/>Name
                     <input name="name"
                            type="text"
                            id="name"
-                           className="formInput"
+                           className="form-input"
                            onChange={formik.handleChange}
                            value={formik.values.name}
                            autoFocus/>
                     {formik.touched.name && formik.errors.name ?
                         <div className="error">{formik.errors.name}</div> : null}
                 </div>
-                <div className="formControl">
+                <div className="form-control">
                     <label htmlFor="price"/>Price
                     <input name="price"
                            type="number"
                            id="price"
-                           className="formInput"
+                           className="form-input"
                            onChange={formik.handleChange}
                            value={formik.values.price}/>
                     {formik.touched.price && formik.errors.price ?
@@ -89,9 +89,9 @@ function EditItemForm({item, onClose}) {
                         {origins.map(origin => <option value={origin.value} key={uuid()}>{origin.displayName}</option>)}
                     </select>
                 </div>
-                <div>
-                    <button className="formButton" type="submit">Save</button>
-                    <button className="formButton" type="reset" onClick={handlerReset}>Clear fields</button>
+                <div className="buttons">
+                    <button type="submit">Save</button>
+                    <button type="reset" onClick={handlerReset}>Clear fields</button>
                 </div>
             </form>
         </>

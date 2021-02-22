@@ -1,59 +1,63 @@
-.perPage {
+.footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 40px;
-    border-top: 1px solid black;
+    min-height: 40px;
+    border-top: 1px solid lightgrey;
     margin-left: 160px;
 }
-.pagination {
-    width: 15%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    list-style-type: none;
-    list-style-image: initial;
-    padding-left: 0;
-    border-radius: .25rem;
-}
 .pagination-block {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-}
-.pagination a {
-    text-decoration: none;
-    color: slateblue;
-}
-.page-active {
-    font-weight: bolder;
-}
-.pagination-block {
-    display: flex;
     justify-content: center;
-    width: 80%;
+    align-items: center;
+    min-width: 80%;
     height: 30px;
     margin-left: 5%;
+    margin-top: 20px;
 }
-.pageBox {
-    height: 20px;
-    width: 20px;
-    background-color: slateblue;
+.arrow-icon {
+    min-height: 20px;
+    min-width: 20px;
+    background-color:  #796eb9;
     color: antiquewhite;
     border-radius: 2px;
     text-align: center;
 }
-.selector {
+.limit-selector {
     float: right;
-    height: 25px;
+    min-height: 25px;
     width: 5%;
+    margin-top: 20px;
 }
-.pageFocused {
-    margin-right: 5px;
-    color: darkorchid;
-    font-weight: bolder;
-    border-bottom: 1px solid darkorchid
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul.pagination li {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+}
+ul.pagination li a {
+    text-decoration: none;
+    color: #7e75b2;
+    font-size: 15px;
+    padding: 8px;
+}
+
+ul.pagination li.active a {
+    color: slateblue;
+}
+ul.pagination li.active {
+    background-color: lavenderblush;
+    border-radius: 3px;
+}
+
+ul.pagination li a:hover,
+ul.pagination li a.active {
+    color: slateblue;
 }

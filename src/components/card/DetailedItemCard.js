@@ -8,18 +8,13 @@ function DetailedItemCard({item}) {
     const dispatch = useDispatch()
     const cartItems = useSelector(state => state.cartReducer.items)
     return (
-        <div className="detailedItemCard">
-            <div className="detailedItemCardContent">
+        <div className="detailed-item-card">
+            <div className="detailed-item-card-content">
                 <p>{item.name}</p>
                 <p>Price: {item.price}</p>
                 <p>Origin: {item.origin}</p>
             </div>
-            <div className="buttonContainer">
-                <button className="buyButton"
-                        onClick={() => dispatch(addToCart(cartItems, item))}
-                >Buy
-                </button>
-            </div>
+            <button onClick={() => dispatch(addToCart(cartItems, item))}>Buy</button>
         </div>
     );
 }

@@ -1,87 +1,52 @@
-.itemCard {
+.item-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
     background-color: lavenderblush;
-    width: 220px;
-    height: 193px;
+    min-width: 220px;
+    min-height: 185px;
     border: 1px solid lavenderblush;
     cursor: pointer;
     border-radius: 5px;
     margin-bottom: 5px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
-.itemCardContent {
+.item-card-content {
     margin-left: 10%;
+    align-self: flex-start;
 }
-.p.itemCardContent {
+.item-card-content > p {
     line-height: 1.2;
 }
-.detailedItemCard {
+.detailed-item-card-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 100px
+}
+.detailed-item-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
     background-color: lavenderblush;
-    width: 320px;
-    height: 200px;
+    min-width: 30vw;
+    min-height: 30vh;
     border: 1px solid lavenderblush;
-    margin: 100px auto;
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
-.detailedItemCardContent {
-    margin-left: 35px
+.detailed-item-card-content {
+    margin-left: 10%;
+    align-self: flex-start;
 }
-.buttonContainer {
-    margin-top: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.buyButton {
-    width: 65%;
-    height: 35px;
-    font-size: 1rem;
-    border-radius: 5px;
-    background-color: slateblue;
-    outline: none;
-    color: antiquewhite;
-    border: 1px solid slateblue;
-}
-.buyButton:hover{
-    background-color: darkslateblue;
-     cursor: pointer;
-}
-.form {
-    background-color: lavenderblush;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-.formButton {
-    margin: 20px 2px 0 2px;
-    border-radius: 5px;
-    border: 1px solid slateblue;
-    background-color: slateblue;
-    color: antiquewhite;
-    height: 30px;
-    width: 85px;
-    cursor: pointer;
-}
-.formButton:hover {
-    background-color: darkslateblue;
-}
-.formInput {
-    text-align: left;
-    background-color: lavenderblush;
-    appearance: none;
-    border: 1px solid indigo;
-    border-radius: 5px;
-}
-.formInput:focus {
-    outline: none;
-}
-.selector {
+.buttons {
     display: flex;
     flex-direction: row;
-    justify-items: center;
-    align-items: center;
+    justify-content: space-between;
+    min-width: 100%;
 }
-
 

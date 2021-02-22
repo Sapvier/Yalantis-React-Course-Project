@@ -21,7 +21,7 @@ function ItemsList({products}) {
     }, []);
 
     return (
-        <div className="itemsContainer">
+        <div className="items-container">
             {products.length > 0 && products
                 .map(product => <ItemCard
                     item={product}

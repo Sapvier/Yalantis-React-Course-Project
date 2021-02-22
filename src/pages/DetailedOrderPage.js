@@ -25,7 +25,7 @@ function DetailedOrderPage() {
     }, [])
 
     return (
-        <div>
+        <div className="detailed-order-card-page">
             <DetailedOrderCard order={order}/>
         </div>
 

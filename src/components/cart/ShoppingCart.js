@@ -42,16 +42,17 @@ function ShoppingCart({cartItems, total}) {
     }
 
     return (
-        <div className="shoppingCart">
-            <div className="navbarHeader">
-                <NavLink to="/" className="backHome">Home</NavLink>
+        <div className="cart-page">
+            <div className="navbar">
+                <NavLink to="/">Home</NavLink>
+                <span></span>
             </div>
-            <div className="cartItemsBlock">
-                {cartItems.length > 0 && <div className="shoppingCartTotalBlock">
-                    <p className="shoppingCartTotal">Cart Subtotal: {total}</p>
+            <div className="shopping-cart">
+                {cartItems.length > 0 && <div className="shopping-cart-total">
+                    <p>Cart Subtotal: {total}</p>
                 </div>}
                 {cartItems.length === 0 && <p>Your cart is empty</p>}
-                <div className="shoppingCartItems">
+                <div className="shopping-cart-items">
                     {cartItems.map(item => <CartItem
                             key={item.id}
                             item={item}
@@ -59,11 +60,11 @@ function ShoppingCart({cartItems, total}) {
                             handleAddClick={handleAddClick}
                             changeHandler={changeHandler}
                             removeClick={removeClick}
-                            className="shoppingCartName"/>)}
+                            className="shopping-cart-name"/>)}
                 </div>
-                <div className="checkoutBlock">
-                    {cartItems.length > 0 && <button className="checkOutButton" onClick={clickHandler}>Checkout</button>}
-                </div>
+                {cartItems.length > 0 && <div className="checkout">
+                    <button onClick={clickHandler}>Checkout</button>
+                </div>}
             </div>
         </div>
     );

@@ -45,14 +45,14 @@ function AddItemForm({onClose}) {
 
     return (
         <>
-            <span className="closeModal" onClick={onClose}>&#10005;</span>
+            <span className="close-modal" onClick={onClose}>&#10005;</span>
             <form className="form" onSubmit={formik.handleSubmit}>
-                <div className="formControl">
+                <div className="form-control">
                     <label htmlFor="name"/>Name
                     <input name="name"
                            type="text"
                            id="name"
-                           className="formInput"
+                           className="form-input"
                            onChange={formik.handleChange}
                            value={formik.values.name}
                            onBlur={formik.handleBlur}
@@ -60,12 +60,12 @@ function AddItemForm({onClose}) {
                     {formik.touched.name && formik.errors.name ?
                         <div className="error">{formik.errors.name}</div> : null}
                 </div>
-                <div className="formControl">
+                <div className="form-control">
                     <label htmlFor="price"/>Price
                     <input name="price"
                            type="number"
                            id="price"
-                           className="formInput"
+                           className="form-input"
                            onChange={formik.handleChange}
                            value={formik.values.price}
                            onBlur={formik.handleBlur}/>
@@ -80,7 +80,7 @@ function AddItemForm({onClose}) {
                         {origins.map(origin => <option value={origin.value} key={uuid()}>{origin.displayName}</option>)}
                     </select>
                 </div>
-                <button className="submitButton" type="submit">Submit</button>
+                <button type="submit">Submit</button>
             </form>
         </>
     )

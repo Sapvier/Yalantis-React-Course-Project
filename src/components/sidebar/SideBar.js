@@ -44,10 +44,10 @@ function SideBar({origins, isEditable, filterItems, originsArray}) {
             filterItems,
             isEditable
         })),
-        history.replace({
-            pathname: `${location.pathname}`,
-            search: `minPrice=${filterItems.minPrice}&maxPrice=${filterItems.maxPrice}&origin=${originsArr.join()}`
-        })]
+            history.replace({
+                pathname: `${location.pathname}`,
+                search: `minPrice=${filterItems.minPrice}&maxPrice=${filterItems.maxPrice}&origin=${originsArr.join()}`
+            })]
     }, []);
 
 
@@ -94,15 +94,16 @@ function SideBar({origins, isEditable, filterItems, originsArray}) {
                         changeHandler={changeHandler}
                         originsArray={originsArray}
                     />)}
-                <div className="priceBlock">Price
-                    <div className="priceRange">
+
+                <div className="price-block">Price
+                    <div className="price-range">
                         <input type="number"
-                               className="sideBarPrice"
+                               className="sidebar-price"
                                name="minPrice"
                                defaultValue={filterItems.minPrice}
                                onInput={minHandleChange}/>&#8212;
                         <input type="number"
-                               className="sideBarPrice"
+                               className="sidebar-price"
                                name="maxPrice"
                                onInput={maxHandleChange}
                                defaultValue={filterItems.maxPrice}/>

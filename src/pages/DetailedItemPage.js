@@ -28,7 +28,7 @@ function DetailedItemPage() {
 
 
     return (
-        <div>
+        <div className="detailed-item-card-page">
             <DetailedItemCard item={item}/>
         </div>
 

@@ -1,6 +1,42 @@
 body {
-    margin-top: 80px;
-    background-color: #FFFFFFFF;
     font-family: Verdana, sans-serif;
     font-size: 13px
+}
+input {
+    width: 25px;
+    text-align: center;
+}
+span {
+    cursor: pointer;
+    margin: 0.5em;
+}
+button {
+    min-width: 100px;
+    min-height: 35px;
+    font-size: 1rem;
+    border-radius: 5px;
+    background-color: slateblue;
+    outline: none;
+    color: antiquewhite;
+    border: 1px solid slateblue;
+    align-self: center;
+    transition: 0.35s;
+}
+button:hover{
+    background-color: antiquewhite;
+    color: slateblue;
+    cursor: pointer;
+}
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    background: lavenderblush;
+}
+::-webkit-scrollbar-thumb {
+    background: slateblue;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: darkslateblue;
 }

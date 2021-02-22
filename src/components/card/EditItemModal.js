@@ -1,15 +1,13 @@
 import React from 'react';
 import "../header/NavBar.css";
 import ReactDom from 'react-dom'
-import {useInjectSaga} from "../../store/injectSaga";
-import productsFormSaga from "../../store/form/saga";
 
 
 function EditItemModal({open, children, onClose}) {
     if (!open) return null
     return ReactDom.createPortal(
         <>
-            <div className="modalOverlay" onClick={onClose}/>
+            <div className="modal-overlay" onClick={onClose}/>
             <div className="modal">
                 {children}
             </div>

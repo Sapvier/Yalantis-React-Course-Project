@@ -11,7 +11,7 @@ import {fetchLoading} from "../store/products/actions";
 
 
 
-function MyProductsPage({filterItems, products}) {
+function MyProductsPage({products}) {
     useInjectSaga('productsSaga', productsSaga)
     const dispatch = useDispatch()
     const isEditable = true
@@ -21,7 +21,7 @@ function MyProductsPage({filterItems, products}) {
                 path: `/products`,
                 method: 'GET',
                 data: null,
-                filter: `?page=${filterItems.currentPage}&perPage=${filterItems.perPage}&origins=${filterItems.origin}&minPrice=${filterItems.minPrice}&maxPrice=${filterItems.maxPrice}&editable=${isEditable}`
+                filter: `?editable=${isEditable}`
             })
         )
     }, [])

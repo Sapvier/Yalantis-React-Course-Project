@@ -5,15 +5,15 @@ import "./SideBar.css";
 function Origin({origin, changeHandler, originsArray}) {
     if (origin.isChecked) {
         return (
-            <div>
+            <div className="origin">
                 <input type="checkbox" onChange={() => changeHandler(origin, originsArray)} defaultChecked/>
-                <div className="originName">{origin.displayName}</div>
+                <div className="origin-name">{origin.displayName}</div>
             </div>
         )
     } else return (
-        <div>
+        <div className="origin">
             <input type="checkbox" onChange={() => changeHandler(origin, originsArray)}/>
-            <div className="originName">{origin.displayName}</div>
+            <div className="origin-mame">{origin.displayName}</div>
         </div>
     )
 }

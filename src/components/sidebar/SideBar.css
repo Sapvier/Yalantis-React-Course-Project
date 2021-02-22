@@ -3,35 +3,24 @@ aside {
     top: 95px;
 }
 .origin {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
     padding-left: 10px;
     padding-bottom: 5px;
 }
-.originName {
+.origin-name {
     display: inline-block;
 }
-.filterButton {
-    width: 60%;
-    height: 35px;
-    font-size: 1rem;
-    margin: 10px 20% 10px 20%;
-    border-radius: 5px;
-    background-color: slateblue;
-    outline: none;
-    color: lavenderblush;
-    border: 1px solid slateblue;
-}
-.filterButton:hover{
-    background-color: darkslateblue;
-    cursor: pointer;
-}
-.sideBarPrice {
+.sidebar-price {
     margin: 5px;
     width: 35px
 }
-.priceRange {
+.price-range {
     margin-top: 10px;
 }
-.priceBlock {
+.price-block {
     border-top: 1px lightgrey solid;
     border-bottom: 1px lightgrey solid;
     margin-top: 20px;

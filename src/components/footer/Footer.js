@@ -56,9 +56,9 @@ function Footer({filterItems, isEditable, filter}) {
     }
 
     return (
-        <div className="perPage">
+        <div className="footer">
             <div className="pagination-block">
-                <span className="pageBox" onClick={backClickHandler}>&#10094;</span>
+                <span className="arrow-icon" onClick={backClickHandler}>&#10094;</span>
                 <Pagination
                     activePage={filterItems.currentPage}
                     itemsCountPerPage={filterItems.perPage}
@@ -69,9 +69,9 @@ function Footer({filterItems, isEditable, filter}) {
                     hideNavigation={true}
                     activeLinkClass="page-active"
                 />
-                <span className="pageBox" onClick={forwardClickHandler}>&#10095;</span>
+                <span className="arrow-icon" onClick={forwardClickHandler}>&#10095;</span>
             </div>
-            <div className="selector">
+            <div className="limit-selector">
                 <select onChange={changeHandler} defaultValue={filterItems.perPage}>
                     <option value="10">10</option>
                     <option value="25">25</option>
